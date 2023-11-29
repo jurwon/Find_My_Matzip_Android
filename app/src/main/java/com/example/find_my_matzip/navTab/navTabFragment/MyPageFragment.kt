@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -219,11 +220,24 @@ class MyPageFragment : Fragment() {
         builder.show()
     }
     private fun navigateToUserProfile(userId: String) {
-        // 팔로워 해당 유저의 프로필로 이동하는 코드를 추가
-        val profileFragment = ProfileFragment.newInstance(userId)
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, profileFragment)
-        //    transaction.addToBackStack(null)
-        transaction.commit()
+        // 클릭 시 HomeFollowFragment로 이동하는 코드
+        val fragment = ProfileFragment.newInstance(userId)
+
+        // 트랜잭션에 이름 부여
+        val transaction = parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
+
+        // 현재의 HomeFragment를 백 스택에서 제거
+        parentFragmentManager.popBackStack("MyPageFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+//
+//        // 팔로워 해당 유저의 프로필로 이동하는 코드를 추가
+//        val profileFragment = ProfileFragment.newInstance(userId)
+//        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//        transaction.replace(R.id.fragmentContainer, profileFragment)
+//        //    transaction.addToBackStack(null)
+//        transaction.commit()
     }
 }

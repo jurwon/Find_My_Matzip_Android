@@ -2,11 +2,9 @@
 <LinearLayout
     android:id="@+id/userContents"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     >
-    <!--이미지 뷰 하나 텍스트뷰 3개-->
     <ImageView
         android:id="@+id/boardImgUrl"
         android:layout_width="150dp"
@@ -17,54 +15,5 @@
         >
     </ImageView>
 
-    <!--    val pageUserDto : PageUserDto,-->
-    <!--    val followerDtoList : List<FollowerDto>,-->
-    <!--    val followingDtoList: List<FollowDto>,-->
-    <!--    val countBoard: Int,-->
-    <!--    val loginUserDto: UsersFormDto,-->
-    <!--    val countFromUser: Int,-->
-    <!--    val countToUser: Int,-->
-    <!--    val followCheck: Boolean,-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:padding="5dp"-->
-<!--        android:layout_gravity="center">-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/boardId"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="15sp"-->
-<!--            android:text="id"-->
-<!--            android:layout_marginTop="10dp"/>-->
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/boardTitle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="15sp"-->
-<!--            android:text="board_title"-->
-<!--            android:layout_marginTop="10dp"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/boardContent"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="15sp"-->
-<!--            android:text="content"-->
-<!--            android:layout_marginTop="10dp"/>-->
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/boardScore"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="15sp"-->
-<!--            android:text="score"-->
-<!--            android:layout_marginTop="10dp"/>-->
-
-
-<!--    </LinearLayout>-->
-</LinearLayout>
+    </LinearLayout>

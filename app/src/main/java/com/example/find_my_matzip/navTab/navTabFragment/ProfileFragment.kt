@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.find_my_matzip.MyApplication
@@ -329,20 +330,31 @@ class ProfileFragment : Fragment() {
 
     // 팔로워의 프로필로 이동하는 메서드
     private fun navigateToUserProfile(userId: String) {
-        // 팔로워 해당 유저의 프로필로 이동하는 코드를 추가
-        val profileFragment = ProfileFragment.newInstance(userId)
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        // 클릭 시 HomeFollowFragment로 이동하는 코드
+        val fragment = ProfileFragment.newInstance(userId)
+        // 트랜잭션에 이름 부여
+        val transaction = parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
 
-        // 추가된 부분
-        if (!isStateSaved) {
-            transaction.replace(R.id.fragmentContainer, profileFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        } else {
-            // 상태가 저장된 경우에는 커밋을 허용하지 않고 로그를 출력
-            Log.w("ProfileFragment", "Transaction not committed: Fragment state already saved")
-        }
+        // 현재의 HomeFragment를 백 스택에서 제거
+        parentFragmentManager.popBackStack("Profile", FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
+
+//        // 팔로워 해당 유저의 프로필로 이동하는 코드를 추가
+//        val profileFragment = ProfileFragment.newInstance(userId)
+//        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//
+//        // 추가된 부분
+//        if (!isStateSaved) {
+//            transaction.replace(R.id.fragmentContainer, profileFragment)
+//            transaction.addToBackStack(null)
+//            transaction.commit()
+//        } else {
+//            // 상태가 저장된 경우에는 커밋을 허용하지 않고 로그를 출력
+//            Log.w("ProfileFragment", "Transaction not committed: Fragment state already saved")
+//        }
 
     }
 }
