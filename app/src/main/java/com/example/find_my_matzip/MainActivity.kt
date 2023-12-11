@@ -1,15 +1,18 @@
 package com.example.find_my_matzip
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.find_my_matzip.databinding.ActivityMainBinding
-import com.example.find_my_matzip.navTab.TabActivity
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
+import com.example.find_my_matzip.utils.PermissionManager
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             // 위치 권한이 부여되어 있지 않다면 권한 요청
             requestLocationPermission()
         }
+
 
         //자동로그인 설정돼있다면
         val autoLogin = SharedPreferencesManager.getBoolean("autoLogin",false)
@@ -46,10 +50,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        binding.moveHome.setOnClickListener {
-            val intent = Intent(this@MainActivity, TabActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.moveHome.setOnClickListener {
+//            val intent = Intent(this@MainActivity, TabActivity::class.java)
+//            startActivity(intent)
+//        }
     } //oncreate
 
     private fun checkLocationPermission(): Boolean {
@@ -59,7 +63,9 @@ class MainActivity : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED)
     }
 
+
     private fun requestLocationPermission() {
+
         ActivityCompat.requestPermissions(
             this,
             arrayOf(

@@ -220,18 +220,19 @@ class ProfileUpdateFragment : Fragment() {
                                         // 업로드 후, 수행할 콜백 함수 정의. 실패했을 경우 콜백함수 정의
                                         .addOnCompleteListener{task ->
                                             if (task.isSuccessful) {
+                                                Log.e(TAG, " 회원정보 수정 완료")
                                                 Toast.makeText(requireContext(),"회원정보 수정 완료",Toast.LENGTH_SHORT).show()
                                                 //로딩창 지우기
                                                 loadingDialog.dismiss()
 
                                             }else {
-                                                Toast.makeText(requireContext(), "스토리지 업로드 실패", Toast.LENGTH_SHORT).show()
+                                                Log.e(TAG, "스토리지 업로드 실패")
                                                 //로딩창 지우기
                                                 loadingDialog.dismiss()
                                             }
                                         }
                                         .addOnFailureListener { exception ->
-                                            Toast.makeText(requireContext(),"스토리지 업로드 실패 : ${exception.message}", Toast.LENGTH_SHORT).show()
+                                            Log.e(TAG, "스토리지 업로드 실패 : ${exception.message}")
                                             //로딩창 지우기
                                             loadingDialog.dismiss()
                                         }

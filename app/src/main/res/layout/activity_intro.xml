@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/design_default_color_primary"
     android:fontFamily="@font/nexonlight"
-    tools:context=".IntroActivity">
+    tools:context=".IntroActivity"
+    >
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+
 
         >
         <TextView
@@ -31,12 +33,13 @@
             />
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="170dp"
-            android:layout_height="180dp"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
             android:layout_marginTop="12dp"
+            android:src="@drawable/first"
             android:rotationX="22"
             android:rotationY="12"
-            android:src="@drawable/intro"
+
             android:layout_gravity="center"
             android:layout_marginBottom="30dp"/>
 

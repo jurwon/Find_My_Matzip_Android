@@ -45,9 +45,15 @@ class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List
 
         binding.resId.text = Item?.res_id
         binding.resName.text = Item?.res_name
+        binding.resDistrict.text= Item?.res_district
         binding.resMenu.text = Item?.res_menu
         binding.resIntro.text = Item?.res_intro
-        binding.avgScore.text = Item?.avgScore.toString()
+//        binding.avgScore.text = Item?.avgScore.toString()
+
+        //소수 둘째자리에서 반올림
+        val ratingUpScore = Item?.avgScore?.toFloat()?.let {
+            kotlin.math.round(it * 10) / 10.toFloat()}!!
+        binding.avgScore.text = ratingUpScore.toString()
 
         Glide.with(context)
             .load(Item?.res_thumbnail)
@@ -79,9 +85,4 @@ class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List
             transaction.commit()
         }
     }
-
-
-
-
-
 }

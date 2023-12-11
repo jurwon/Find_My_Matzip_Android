@@ -6,6 +6,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 class PermissionManager {
@@ -22,12 +23,13 @@ class PermissionManager {
                 ActivityResultContracts.RequestPermission()
             ) {
                 if (it) {
-                    Toast.makeText(activity,"권한 승인됨", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(activity,"갤러리 접근 권한 승인됨", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(activity,"권한 승인 안됨", Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(activity,"갤러리 접근 권한 승인 안됨", Toast.LENGTH_SHORT).show()
                 }
             }
 
+            //갤러리
             // 1번 요청하기.
             // 33버전 이상: READ_MEDIA_IMAGES
             // 33버전 미만: READ_EXTERNAL_STORAGE
@@ -49,7 +51,11 @@ class PermissionManager {
                 ) {
                     requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
-            }  }
+            }
+
+        
+        
+        }
 
     }
 }

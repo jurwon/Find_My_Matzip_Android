@@ -69,7 +69,99 @@
                     android:src="@drawable/burger" />
 
             </FrameLayout>
+            <!-- 식당 정보 영역 -->
+            <LinearLayout
+                android:id="@+id/toResDtl"
+                android:background="#33673AB7"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom">
 
+                <!-- 식당 이미지 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+
+                    app:cardCornerRadius="75dp">
+
+                    <ImageView
+                        android:id="@+id/resProfileImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/burger"></ImageView>
+                </androidx.cardview.widget.CardView>
+
+                <!-- 식당 정보 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <!-- 식당 이름 + 주소 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="left"
+                        android:layout_weight="8">
+
+                        <!-- 식당 이름 -->
+                        <TextView
+                            android:id="@+id/resName"
+                            android:textSize="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nexonbold"
+                            android:lineSpacingExtra="5dp"
+                            android:text="식당명"></TextView>
+
+                        <!-- 식당 주소 -->
+                        <TextView
+                            android:id="@+id/resAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="5dp"
+                            android:text="식당주소 불러오는중"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_weight="2">
+
+                        <!-- 식당 평균 점수 -->
+                        <TextView
+                            android:id="@+id/resScore"
+                            android:textSize="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Default" />
+
+                        <TextView
+                            android:textSize="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="점" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
             <!-- 게시글 점수 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,98 +265,5 @@
         </LinearLayout>
 </ScrollView>
 
-        <!-- 식당 정보 영역 -->
-        <LinearLayout
-            android:id="@+id/toResDtl"
-            android:background="#33673AB7"
-            android:layout_marginTop="50dp"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="bottom">
 
-            <!-- 식당 이미지 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-
-                app:cardCornerRadius="75dp">
-
-                <ImageView
-                    android:id="@+id/resProfileImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:src="@drawable/burger"></ImageView>
-            </androidx.cardview.widget.CardView>
-
-            <!-- 식당 정보 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:orientation="horizontal">
-
-                <!-- 식당 이름 + 주소 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="left"
-                    android:layout_weight="8">
-
-                    <!-- 식당 이름 -->
-                    <TextView
-                        android:id="@+id/resName"
-                        android:textSize="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nexonbold"
-                        android:lineSpacingExtra="5dp"
-                        android:text="식당명"></TextView>
-
-                    <!-- 식당 주소 -->
-                    <TextView
-                        android:id="@+id/resAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingExtra="5dp"
-                        android:text="식당주소 불러오는중"></TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2">
-
-                    <!-- 식당 평균 점수 -->
-                    <TextView
-                        android:id="@+id/resScore"
-                        android:textSize="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Default" />
-
-                    <TextView
-                        android:textSize="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="점" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_arrow_forward_ios_24"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
     </FrameLayout>

@@ -1,6 +1,7 @@
 package com.example.find_my_matzip
 
 import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.example.find_my_matzip.retrofit.AuthInterceptor
 import com.example.find_my_matzip.retrofit.BoardService
 import com.example.find_my_matzip.retrofit.RestaurantService
@@ -13,7 +14,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MyApplication : Application() {
+class MyApplication : MultiDexApplication() {
     companion object {
         // 이미지 저장소 , 인스턴스 도구
         lateinit var storage: FirebaseStorage

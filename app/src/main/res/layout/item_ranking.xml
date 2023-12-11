@@ -17,55 +17,101 @@
         android:gravity="right"
         android:layout_weight="1"
         >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            >
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:src="@drawable/rank"
+                android:layout_marginTop="8dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center"
 
+                >
+
+                <TextView
+                    android:id="@+id/numberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nexonbold"
+                    android:textSize="18sp"
+                    android:text="1"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/numberTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nexonbold"
+                    android:textSize="18sp"
+                    android:text="위"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
         <androidx.cardview.widget.CardView
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_gravity="center"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="10dp"
             android:layout_marginRight="20dp">
-    <ImageView
-        android:id="@+id/resThumbnail"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        android:src="@drawable/image2"
-        /></androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_gravity="center"
-        android:layout_weight="1">
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/resId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="레스토랑아이디"
-            android:layout_marginTop="10dp"/>
-        <TextView
-            android:id="@+id/resName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nexonmed"
-            android:textSize="20sp"
-            android:text="맛집이름"
-            android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/resThumbnail"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:src="@drawable/image2"
+                /></androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/avgScore"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nexonlight"
-            android:textSize="20sp"
-            android:text="평점"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/resId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="레스토랑아이디"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/resName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexonmed"
+                android:textSize="20sp"
+                android:text="맛집이름"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/avgScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexonlight"
+                android:textSize="20sp"
+                android:text="평점"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#66857F7F"
+        android:layout_marginTop="13dp"/>
 </LinearLayout>

@@ -56,7 +56,7 @@ class HomeFollowFragment : Fragment() {
             // 트랜잭션에 이름 부여
             val transaction = parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
-                //    .addToBackStack("HomeFollowFragment")
+                //  .addToBackStack("HomeFollowFragment")
                 .commit()
 
             // 현재의 HomeFollowFragment를 백 스택에서 제거

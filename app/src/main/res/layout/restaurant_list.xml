@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:gravity="center">
     <!--이미지 뷰 하나 텍스트뷰 3개-->
 
     <LinearLayout
@@ -12,23 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
-
-
-
+        android:layout_gravity="center"
+        android:padding="20dp">
         <androidx.cardview.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
-            app:cardCornerRadius="10dp"
-            android:layout_marginRight="20dp">
-        <ImageView
-            android:id="@+id/resThumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"
-            android:src="@drawable/image2"/>
+            app:cardCornerRadius="10dp">
+            <ImageView
+                android:id="@+id/resThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:src="@drawable/image2"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -54,7 +51,7 @@
                     android:fontFamily="@font/nexonbold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="18dp"
                     android:text="맛집이름"
                     android:layout_marginTop="10dp"/>
 
@@ -68,34 +65,48 @@
                     android:layout_marginTop="10dp"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/location_on"
+                    android:fontFamily="@font/nexonlight"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="위치"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/res_district"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/nexonlight"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="위치"
+                    android:layout_marginTop="13dp"/>
+            </LinearLayout>
             <TextView
                 android:id="@+id/resMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexonmed"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:text="맛집메뉴"
                 android:layout_marginTop="10dp"/>
-
             <TextView
                 android:id="@+id/resIntro"
                 android:layout_width="wrap_content"
                 android:fontFamily="@font/nexonlight"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:text="맛집설명"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:layout_marginTop="10dp"/>
-
-
         </LinearLayout>
-
     </LinearLayout>
-    <TextView
-        android:layout_width="400dp"
-        android:layout_height="0.2dp"
-        android:background="#666468"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#66857F7F"/>
 </LinearLayout>

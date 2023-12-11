@@ -46,6 +46,11 @@ interface BoardService {
     fun createBoard2(
         @Path("resId") id: String, @Body boardFormDto: BoardFormDto
     ): Call<Unit>
+
+    @POST("board/new3/{resId}")
+    fun createBoard3(
+        @Path("resId") id: String, @Body boardDtoMap: MutableMap<String,Any>
+    ): Call<Unit>
 //    @GET("board/829") // 게시글 상세페이지;
 //    fun getBoardDtl(): Call<BoardDtlDto>
 

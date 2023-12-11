@@ -1,75 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialogLinearLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginBottom="10dp"
-    android:gravity="center"
-    >
+    android:gravity="center">
 
     <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="75dp"
-            android:layout_marginRight="10dp">
-            <ImageView
-                android:id="@+id/dialogUserImg"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/profile"/>
-        </androidx.cardview.widget.CardView>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="75dp">
+
+        <ImageView
+            android:id="@+id/dialogUserImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile" />
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:layout_width="170dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-    <TextView
-        android:id="@+id/dialogUserid"
-        android:layout_gravity="left"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nexonbold"
-        android:textSize="18sp"
-        tools:text="아이디" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/dialogUserName"
-        android:layout_gravity="left"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nexonbold"
-        android:textSize="20sp"
-        tools:text="이름" />
+        <TextView
+            android:id="@+id/dialogUserid"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textSize="18sp"
+            tools:text="아이디" />
+
+        <TextView
+            android:id="@+id/dialogUserName"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textColor="#888484"
+            android:textSize="15sp"
+            tools:text="이름" />
     </LinearLayout>
 
-   <LinearLayout
-       android:layout_width="110dp"
-       android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/followBtn"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:text="팔로우"
-        android:textSize="14sp"
-        android:backgroundTint="@color/design_default_color_on_secondary"
-        android:visibility="visible"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+            <Button
+                android:id="@+id/followBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:backgroundTint="#DDDDDD"
+                android:text="팔로우"
+                android:textColor="#292929"
+                android:textSize="14sp"
+                android:visibility="visible" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp">
 
-    <Button
-        android:id="@+id/unfollowBtn"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:text="언팔로우"
-        android:textSize="14sp"
-        android:backgroundTint="#E91E63"
-        android:visibility="gone"/>
-   </LinearLayout>
+            <Button
+                android:id="@+id/unfollowBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:backgroundTint="#DDDDDD"
+                android:text="언팔로우"
+                android:textColor="#292929"
+                android:textSize="14dp"
+                android:visibility="gone" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
+</LinearLayout>
 
 

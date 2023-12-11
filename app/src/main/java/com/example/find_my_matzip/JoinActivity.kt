@@ -61,8 +61,6 @@ class JoinActivity : AppCompatActivity() {
         //갤러리 접근권한 질문
         PermissionManager.checkPermission(this@JoinActivity)
 
-
-
         //갤러리에서 사진 선택 후
         //가져와서 처리하는 후처리 함수
         val requestLauncher = registerForActivityResult(

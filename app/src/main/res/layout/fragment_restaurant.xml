@@ -31,11 +31,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/resListRecyclerView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:scrollbarThumbVertical="@drawable/custom_scrollbar"
-            android:fadeScrollbars="false">
+            android:fadeScrollbars="false"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 

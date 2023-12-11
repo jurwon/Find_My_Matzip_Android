@@ -33,18 +33,18 @@
             />
 
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:src="@drawable/logo_b"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:layout_constraintBottom_toBottomOf="@+id/joinBtn"
-                tools:srcCompat="@tools:sample/avatars"
-                android:layout_marginBottom="10dp"
-                />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:src="@drawable/logo_b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/joinBtn"
+            tools:srcCompat="@tools:sample/avatars"
+            android:layout_marginBottom="10dp"
+            />
 
 
         <Button
@@ -72,11 +72,11 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/moveHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="홈으로"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!--    <Button-->
+    <!--        android:id="@+id/moveHome"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="홈으로"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

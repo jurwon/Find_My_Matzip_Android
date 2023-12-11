@@ -227,8 +227,8 @@ class     HomeFragment : Fragment() {
     private fun navigateSearchResult(text:String) {
         val changeFragment = newInstance(text,"")
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, changeFragment)
-        //.addToBackStack(null)
+        transaction.add(R.id.fragmentContainer, changeFragment)
+        .addToBackStack(null)
         transaction.commit()
     }
 

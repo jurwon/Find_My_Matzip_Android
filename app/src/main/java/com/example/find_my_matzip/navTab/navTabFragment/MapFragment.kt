@@ -210,7 +210,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
         // 현재 위치 버튼 기능
         naverMap.uiSettings.isLocationButtonEnabled = true
         // 위치를 추적하면서 카메라도 따라 움직인다.
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        // naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
 
         // Btn 시작

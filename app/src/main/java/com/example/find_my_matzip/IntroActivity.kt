@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Glide
 import com.example.find_my_matzip.databinding.ActivityIntroBinding
 import com.example.find_my_matzip.utils.ForcedTerminationService
 import com.example.find_my_matzip.utils.PermissionManager
@@ -27,8 +29,10 @@ class IntroActivity : AppCompatActivity() {
             finish()
         }, 3000) // 3초 있다 메인액티비티로
 
+
         setContentView(binding.root)
 
-
+        val imageView = findViewById<ImageView>(R.id.imageView)
+        Glide.with(this).load(R.raw.first).into(imageView)
     }
 }

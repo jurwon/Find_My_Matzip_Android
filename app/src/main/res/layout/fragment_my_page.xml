@@ -184,17 +184,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeRefreshLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/boardRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/item_boards"/>
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
         </LinearLayout>
 
