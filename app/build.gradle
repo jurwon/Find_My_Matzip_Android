@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    //뷰페이저2 인디케이터 추가
+    implementation("com.tbuonomo:dotsindicator:5.0")
     // 지도 추가
     implementation("com.naver.maps:map-sdk:3.16.2")
     // 위치 추가

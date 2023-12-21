@@ -3,6 +3,7 @@ package com.example.find_my_matzip.retrofit
 import com.example.find_my_matzip.model.BoardDtlDto
 import com.example.find_my_matzip.model.BoardFormDto
 import com.example.find_my_matzip.model.MainBoardDto
+import com.example.find_my_matzip.model.NewMainBoardDto
 import com.example.find_my_matzip.model.ProfileDto
 import retrofit2.Call
 import retrofit2.http.Body
@@ -18,6 +19,10 @@ interface BoardService {
     @GET("pagerbleMain")
     fun getAllBoardsPager(@Query("page") page: Int): Call<List<MainBoardDto>>
 
+    @GET("newPagerbleMain")
+    fun getNewAllBoardsPager(@Query("page") page: Int): Call<List<NewMainBoardDto>>
+
+
     //검색 결과 게시글 불러오기
     @GET("pagerbleMain/{text}")
     fun getSearchMainBoards(@Path("text") text : String,
@@ -28,7 +33,7 @@ interface BoardService {
     fun getSearchResBoards(@Path("redId") redId : String,
                             @Query("page") page: Int): Call<List<MainBoardDto>>
 
-    
+
     @GET("board/{id}") // 게시글 상세페이지;
     fun getBoardDtl(@Path("id") id : String): Call<BoardDtlDto>
 
@@ -36,18 +41,10 @@ interface BoardService {
     fun getMatjalalBoards(@Query("page") page: Int): Call<List<MainBoardDto>>
 
 
-    // 게시글작성 gpt
-    @POST("board/new/{resId}")
-    fun createBoard(
-        @Path("resId") id: String, @Body boardFormDto: BoardFormDto
-    ): Call<Unit>
+    @GET("users/newmatjalal")
+    fun getNewMatjalalBoards(@Query("page") page: Int): Call<List<NewMainBoardDto>>
 
-    @POST("board/new2/{resId}")
-    fun createBoard2(
-        @Path("resId") id: String, @Body boardFormDto: BoardFormDto
-    ): Call<Unit>
-
-    @POST("board/new3/{resId}")
+    @POST("board/new3/{resId}")// 게시글작성페이지
     fun createBoard3(
         @Path("resId") id: String, @Body boardDtoMap: MutableMap<String,Any>
     ): Call<Unit>

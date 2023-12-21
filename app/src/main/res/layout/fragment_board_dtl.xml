@@ -66,7 +66,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/burger" />
+                    android:src="@drawable/readyimg"
+                    android:visibility="gone"
+                    />
+                <!-- 이미지뷰 -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/DtlViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/readyimg" />
+                <!-- 인디케이터 -->
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dots_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:dotsColor="@color/md_blue_200"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="16dp"
+                    app:dotsSpacing="4dp"
+                    app:dotsWidthFactor="2.5"
+                    app:selectedDotColor="@color/md_indigo_A400"
+                    app:progressMode="true"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="10dp"
+                    />
 
             </FrameLayout>
             <!-- 식당 정보 영역 -->
