@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/allItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--이미지 뷰 하나 텍스트뷰 3개-->
+    <!--    <androidx.viewpager2.widget.ViewPager2-->
+    <!--        android:id="@+id/view_pager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" />-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#66857F7F"/>
+    <!-- 사용자 프로필 -->
+    <LinearLayout
+        android:id="@+id/userLinearLayout"
+        android:background="#70FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:gravity="left">
+
+        <!-- 사용자 프로필 이미지 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            app:cardCornerRadius="75dp">
+
+            <ImageView
+                android:id="@+id/userProfileImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/profile" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/userId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:text="사용자 이름" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/gotoboardDtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/ImgViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="@drawable/readyimg"/>
+        <!-- 인디케이터 -->
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotsColor="@color/md_blue_200"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="16dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:selectedDotColor="@color/md_indigo_A400"
+            app:progressMode="true"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="10dp"
+            />
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/recyclerViewDtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_gravity="center">
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/indicator"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="30dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:layout_gravity="center">-->
+<!--            <ImageView-->
+<!--                android:id="@+id/indicator0_iv_main"-->
+<!--                android:layout_width="10dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/shape_circle_purple" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/indicator1_iv_main"-->
+<!--                android:layout_width="10dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/indicator0_iv_main"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/indicator0_iv_main"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/indicator0_iv_main"-->
+<!--                app:srcCompat="@drawable/shape_circle_gray" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/indicator2_iv_main"-->
+<!--                android:layout_width="10dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/indicator1_iv_main"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/indicator1_iv_main"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/indicator1_iv_main"-->
+<!--                app:srcCompat="@drawable/shape_circle_gray" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <LinearLayout
+            android:id="@+id/titleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/boardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="게시글 제목" />
+
+            <RatingBar
+                android:id="@+id/boardScore"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:progressTint="#E91E63"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="1"
+                android:scaleX="0.5"
+                android:scaleY="0.5"/>
+
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/boardId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

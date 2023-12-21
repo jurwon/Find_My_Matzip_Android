@@ -12,10 +12,13 @@ import com.example.find_my_matzip.MyApplication
 import com.example.find_my_matzip.R
 import com.example.find_my_matzip.databinding.FragmentBoardDtlBinding
 import com.example.find_my_matzip.model.BoardDtlDto
+import com.example.find_my_matzip.navTab.adapter.BoardDtlViewPagerAdapter
 import com.example.find_my_matzip.navTab.adapter.BoardRecyclerAdapter
+import com.example.find_my_matzip.navTab.adapter.NewHomeViewPagerAdapter
 import com.example.find_my_matzip.navTab.adapter.ProfileAdapter
 import com.example.find_my_matzip.retrofit.BoardService
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,7 +70,7 @@ class boardDtlFragment : Fragment() {
                 binding.boardDtlTitle.text = boardDto?.board?.boardTitle.toString()
                 binding.boardDtlContent.text = boardDto?.board?.content.toString()
                 binding.boardScore.rating = boardDto?.board?.score?.toFloat() ?: 0.0f
-                binding.userId.text = boardDto?.users?.userid.toString()
+                binding.userId.text = boardDto?.users?.username.toString()
                 val userImg = boardDto?.users?.user_image
                 if(userImg != null){
                     Glide.with(requireContext())
@@ -85,19 +88,24 @@ class boardDtlFragment : Fragment() {
 
                 Log.d("kkt","바인딩완료")
 
-                Glide.with(requireContext())
-                    .load(boardDto?.board?.boardImgDtoList?.get(0)?.imgUrl)
-                    .override(900, 900)
-                    .into(binding.boardThumbnail)
+                // 기존 게시물이미지 그려주던 글라이드
+//                Glide.with(requireContext())
+//                    .load(boardDto?.board?.boardImgDtoList?.get(0)?.imgUrl)
+//                    .override(900, 900)
+//                    .into(binding.boardThumbnail)
+                val viewPager = binding.DtlViewPager
+                // 이미지 리사이클러뷰 어댑터 초기화
+                val viewPagerAdapter =
+                    boardDto?.board?.let { BoardDtlViewPagerAdapter(binding.root.context, it.boardImgDtoList) }
+                viewPager.adapter = viewPagerAdapter
+
+                // 인디케이터 추가
+                val dotsIndicator: DotsIndicator = binding.dotsIndicator // 인디케이터 뷰의 ID를 넣어주세요
+                dotsIndicator.setViewPager2(viewPager)
+
+
 
                 Log.d("MyPageFragment", "도착 확인2: res_thumbnail ${boardDto?.board?.boardImgDtoList?.get(0)?.imgUrl}")
-//                binding.resThumbnail.
-//                ProfileAdapter(this@MyPageFragment, listOf(profileDto.pageUserDto))
-//
-//                binding.boardRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-//                BoardRecyclerAdapter(this@MyPageFragment, profileDto.boards.content)
-//                binding.boardRecyclerView.adapter = boardAdapter
-
 
 
 
