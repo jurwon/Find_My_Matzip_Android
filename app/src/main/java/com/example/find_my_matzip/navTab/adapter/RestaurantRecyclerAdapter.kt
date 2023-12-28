@@ -5,20 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.find_my_matzip.R
 import com.example.find_my_matzip.databinding.RestaurantListBinding
-import com.example.find_my_matzip.model.ContentDto
-import com.example.find_my_matzip.model.ResWithScoreDto
-import com.example.find_my_matzip.navTab.navTabFragment.NearRestaurantFragment
+import com.example.find_my_matzip.model.RestaurantDto
 import com.example.find_my_matzip.navTab.navTabFragment.RestaurantDtlFragment
 import com.example.find_my_matzip.navTab.navTabFragment.RestaurantFragment
 
 class RestaurantViewHolder(val binding: RestaurantListBinding) : RecyclerView.ViewHolder(binding.root)
 
-class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List<ResWithScoreDto>?) :
+class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List<RestaurantDto>?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return RestaurantViewHolder(
@@ -33,7 +30,7 @@ class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List
         return datas?.size ?: 0
     }
 
-    fun addData(newData: List<ResWithScoreDto>) {
+    fun addData(newData: List<RestaurantDto>) {
         val oldSize = datas?.size ?: 0
         datas = datas.orEmpty() + newData
         notifyItemRangeInserted(oldSize, newData.size)
@@ -43,7 +40,7 @@ class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List
         val binding = (holder as RestaurantViewHolder).binding
         val Item = datas?.get(position)
 
-        binding.resId.text = Item?.res_id
+        binding.resId.text = Item?.res_id.toString()
         binding.resName.text = Item?.res_name
         binding.resDistrict.text= Item?.res_district
         binding.resMenu.text = Item?.res_menu
@@ -66,7 +63,9 @@ class RestaurantRecyclerAdapter(val context: RestaurantFragment, var datas: List
 
             // 데이터를 전달하기 위한 Bundle 생성
             val bundle = Bundle().apply {
-                putString("resId", resId)
+                if (resId != null) {
+                    putLong("resId", resId)
+                }
             }
 
             // RestaurantDtlFragment의 인스턴스 생성

@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 // res 객체
 data class RestaurantDto(
-    @SerializedName("resId") val res_id: String,
+    @SerializedName("resId") val res_id: Long,
     @SerializedName("operate_time") val operate_time: String,
     @SerializedName("res_address") val res_address: String,
     @SerializedName("res_district") val res_district: String,
-    @SerializedName("res_image") val res_image: String,
+    //@SerializedName("res_image") val res_image: String,
     @SerializedName("res_intro") val res_intro: String,
     @SerializedName("res_lat") val res_lat: String,
     @SerializedName("res_lng") val res_lng: String,

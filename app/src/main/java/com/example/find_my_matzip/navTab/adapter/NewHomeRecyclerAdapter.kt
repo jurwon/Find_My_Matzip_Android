@@ -65,17 +65,17 @@ class NewHomeRecyclerAdapter(context : Context) : RecyclerView.Adapter<NewMainBo
         onUserClickListener = listener
     }
 
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewMainBoardViewHolder {
-    val itemBinding = ItemNewmainboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-    return NewMainBoardViewHolder(itemBinding,
-        { boardId ->
-            onItemClickListener?.invoke(boardId)
-        },
-        { userId ->
-            onUserClickListener?.invoke(userId) // 유저 클릭 리스너 호출
-        }
-    )
-}
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewMainBoardViewHolder {
+        val itemBinding = ItemNewmainboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return NewMainBoardViewHolder(itemBinding,
+            { boardId ->
+                onItemClickListener?.invoke(boardId)
+            },
+            { userId ->
+                onUserClickListener?.invoke(userId) // 유저 클릭 리스너 호출
+            }
+        )
+    }
 
     override fun getItemCount(): Int {
         return datas.size

@@ -1,11 +1,9 @@
 package com.example.find_my_matzip
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
@@ -14,15 +12,12 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.find_my_matzip.databinding.ActivityHomeTabBinding
 import com.example.find_my_matzip.navTab.navTabFragment.HomeFollowFragment
-import com.example.find_my_matzip.navTab.navTabFragment.HomeFragment
 import com.example.find_my_matzip.navTab.navTabFragment.MapFragment
 import com.example.find_my_matzip.navTab.navTabFragment.MyPageFragment
 import com.example.find_my_matzip.navTab.navTabFragment.NewHomeFragment
-import com.example.find_my_matzip.navTab.navTabFragment.ProfileFragment
 import com.example.find_my_matzip.navTab.navTabFragment.RankingFragment
 import com.example.find_my_matzip.navTab.navTabFragment.RestaurantFragment
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
@@ -83,6 +78,7 @@ class HomeTabActivity : AppCompatActivity() {
                     replaceFragment(MyPageFragment())
                 }
 
+
                 else -> false
             }
             return@setOnNavigationItemSelectedListener true
@@ -106,6 +102,13 @@ class HomeTabActivity : AppCompatActivity() {
                 val intent = Intent(this@HomeTabActivity, LoginActivity::class.java)
                 startActivity(intent)
 
+            /* 친구 목록 추가 */
+            } else if (it.title == "친구 목록") {
+                Toast.makeText(this@HomeTabActivity, "친구 목록 화면 이동", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this@HomeTabActivity, ChatActivity::class.java)
+                startActivity(intent)
+
             } else if (it.title == "회원 탈퇴") {
 
                 val builder = AlertDialog.Builder(this@HomeTabActivity)
@@ -121,6 +124,14 @@ class HomeTabActivity : AppCompatActivity() {
                     showVertifyPw()
                 }
                 builder.show()
+            }  else if (it.title == "식당 추가") {
+                if (loginUserId == "admin") {
+                    val intent = Intent(this@HomeTabActivity, AddRestaurantActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    // User doesn't have access, show a toast message
+                    Toast.makeText(this@HomeTabActivity, "접근 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
 
             true

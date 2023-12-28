@@ -67,7 +67,7 @@ class MyPageFragment : Fragment() {
         binding.boardRecyclerView.adapter = boardAdapter
 
         binding.updateBtn.setOnClickListener {
-//            profileUpdateFragment 회원수정창(타 프레그먼트로) 이동하는 코드
+//            profileUpdateFragment 회원 수정 창(다른 프래그먼트)으로 이동하는 코드
             val profileUpdateFragment = ProfileUpdateFragment()
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.add(R.id.fragmentContainer, profileUpdateFragment)
@@ -76,7 +76,7 @@ class MyPageFragment : Fragment() {
         }
 
         binding.writeBoardBtn.setOnClickListener {
-//            게시글작성창으로 이동
+//            게시글 작성 창으로 이동
             val writeReviewFragment = WriteReviewFragment()
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.add(R.id.fragmentContainer, writeReviewFragment)
@@ -125,7 +125,7 @@ class MyPageFragment : Fragment() {
 
     private fun loadNextPageData(page: Int): FrameLayout {
         isLoading = true
-        // 로그인한 사용자의 아이디를 가져와서 해당 사용자의 프로필 정보를 서버에서 조회
+        // 로그인한 사용자의 아이디를 가져와서 - 해당 사용자의 프로필 정보를 서버에서 조회
         val userId = SharedPreferencesManager.getString("id","")
         val userService = (context?.applicationContext as MyApplication).userService
         val profileList = userService.getProfile(userId,page)
@@ -146,13 +146,13 @@ class MyPageFragment : Fragment() {
                 Log.d("MyPageFragment", "도착 확인5: followcheck ${profileDto?.followcheck}")
                 if (profileDto != null) {
                     // 팔로워, 팔로잉, 게시물 수 업데이트
-                    // 팔로워 팔로우수
+                    // 팔로워 팔로우 수
                     binding.countFromUser.text = profileDto.countFromUser.toString()
                     binding.countToUser.text = profileDto.countToUser.toString()
                     binding.countBoard.text = profileDto.countBoard.toString()
 //                    binding.followCheck.text=profileDto.followCheck.toString()
 
-                    // 유저정보
+                    // 유저 정보
                     binding.userId.text = profileDto.pageUserDto.userid
 //                    binding.userName.text = profileDto.pageUserDto.username
 //                    binding.userAddress.text = profileDto.pageUserDto.user_address
@@ -161,7 +161,7 @@ class MyPageFragment : Fragment() {
 //                    binding.gender.text = profileDto.pageUserDto.gender
 
 
-                    // 다른 필요한 데이터들도 마찬가지로 설정
+                    // 다른 필요한 데이터들도 똑같이 설정
 
                     if(profileDto.pageUserDto.user_image != ""){
                         Glide.with(requireContext())
@@ -193,7 +193,8 @@ class MyPageFragment : Fragment() {
                     binding.following.setOnClickListener {
                         val followingList: List<FollowDto> = profileDto.followingDtoList ?: emptyList()
                         Log.d("MyPageFragment", "도착 확인6: followingDtoList $followingList")
-//
+
+
 
                         if(followingList!=null){
                             CustomDialog(requireContext(), followingList, CustomDialog.DialogType.FOLLOWING).apply {

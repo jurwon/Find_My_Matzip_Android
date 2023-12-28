@@ -104,16 +104,16 @@
             <EditText
                 android:id="@+id/userId"
                 android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_height="63dp"
                 android:layout_gravity="center"
                 android:background="@drawable/radius"
-                android:fontFamily="@font/nexonlight"
-                android:paddingLeft="30dp"
-                android:hint="UserId"
-                android:textColor="#B3B3B3"
-                android:textSize="15sp"
                 android:ems="10"
-                android:inputType="textPersonName"></EditText>
+                android:fontFamily="@font/nexonlight"
+                android:hint="UserId"
+                android:inputType="textPersonName"
+                android:paddingLeft="30dp"
+                android:textColor="#B3B3B3"
+                android:textSize="15sp"></EditText>
 
             <EditText
                 android:id="@+id/userPwd"

@@ -58,7 +58,7 @@ object SharedPreferencesManager{
 
 
     //원하는 값 하나만 가져오기
-    //사용 예시 : getString(this, id, "") => "유저아이디"
+    //사용 예시 : getString("id", "") => "유저아이디"
     fun getString(key:String,defValue:String):String{
         return prefs?.getString(key, defValue).toString()
     }

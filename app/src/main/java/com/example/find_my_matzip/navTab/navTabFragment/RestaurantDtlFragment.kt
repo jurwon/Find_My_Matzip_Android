@@ -20,15 +20,15 @@ import retrofit2.Response
 
 
 class RestaurantDtlFragment : Fragment() {
-    private var resId: String? = null
+    private var resId: Long = 0L
     lateinit var binding : FragmentRestaurantDtlBinding
 
     //resId 값으로 식당상세페이지 이동
     companion object {
-        fun newInstance(resId: String): RestaurantDtlFragment {
+        fun newInstance(resId: Long): RestaurantDtlFragment {
             val fragment = RestaurantDtlFragment()
             val args = Bundle()
-            args.putString("resId", resId)
+            args.putLong("resId", resId)
             fragment.arguments = args
             return fragment
         }
@@ -43,26 +43,26 @@ class RestaurantDtlFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        resId = arguments?.getString("resId")
+        resId = arguments?.getLong("resId") ?: 0L
         binding = FragmentRestaurantDtlBinding.inflate(layoutInflater,container,false)
 
         val restaurantService = (context?.applicationContext as MyApplication).restaurantService
-        val restaurantDtl = arguments?.getString("resId")?.let { restaurantService.getRestaurantDtl(it) }
+        val restaurantDtl = arguments?.getLong("resId")?.let { restaurantService.getRestaurantDtl(it) }
 
-        Log.d("restaurantDtlFlagment","restaurantDtl.enqueue 호출 전 : $restaurantDtl")
+        Log.d("RestaurantDtlFragment","restaurantDtl.enqueue 호출 전 : $restaurantDtl")
 
         restaurantDtl?.enqueue(object : Callback<RestaurantDto>{
             override fun onResponse(call: Call<RestaurantDto>, response: Response<RestaurantDto>) {
 
-                Log.d("kkt","레스토랑 도착 확인.")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인.")
                 val restaurantDto = response.body()
-                Log.d("kkt","레스토랑 도착 확인1. : restaurantDto $restaurantDto")
-                Log.d("kkt","레스토랑 도착 확인2. : restaurantDto.res_id ${restaurantDto?.res_id}")
-                Log.d("kkt","레스토랑 도착 확인3. : restaurantDto.operate_time ${restaurantDto?.operate_time}")
-                Log.d("kkt","레스토랑 도착 확인4. : restaurantDto.res_address ${restaurantDto?.res_address}")
-                Log.d("kkt","레스토랑 도착 확인5. : restaurantDto.res_district ${restaurantDto?.res_district}")
-                Log.d("kkt","레스토랑 도착 확인6. : restaurantDto.res_intro ${restaurantDto?.res_intro}")
-                Log.d("kkt","레스토랑 도착 확인7. : restaurantDto.avgScore ${restaurantDto?.avgScore}")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인1. : restaurantDto $restaurantDto")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인2. : restaurantDto.res_id ${restaurantDto?.res_id}")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인3. : restaurantDto.operate_time ${restaurantDto?.operate_time}")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인4. : restaurantDto.res_address ${restaurantDto?.res_address}")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인5. : restaurantDto.res_district ${restaurantDto?.res_district}")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인6. : restaurantDto.res_intro ${restaurantDto?.res_intro}")
+                Log.d("RestaurantDtlFragment","레스토랑 도착 확인7. : restaurantDto.avgScore ${restaurantDto?.avgScore}")
 
                 binding.resName.text = restaurantDto?.res_name.toString()
                 binding.resAddress.text = restaurantDto?.res_address.toString()
@@ -82,13 +82,13 @@ class RestaurantDtlFragment : Fragment() {
                     .override(900, 900)
                     .into(binding.resThumbnail)
 
-                Log.d("MyPageFragment", "도착 확인2: res_thumbnail ${restaurantDto?.res_thumbnail}")
+                Log.d("RestaurantDtlFragment", "도착 확인2: res_thumbnail ${restaurantDto?.res_thumbnail}")
 
                 binding.toWriteReview.setOnClickListener {
-                    Log.d("kkt", "게시글작성가기 클릭됨")
-                    Log.d("kkt", "resId: ${restaurantDto?.res_id}")
+                    Log.d("RestaurantDtlFragment", "게시글작성가기 클릭됨")
+                    Log.d("RestaurantDtlFragment", "resId: ${restaurantDto?.res_id}")
                     val resId = restaurantDto?.res_id
-                    if (resId.isNullOrEmpty()) {
+                    if (resId == 0L) {
                         Log.d("RestaurantDtlFragment", "resId is 비엇다~")
                     }else{
                         val fragment = WriteReviewFragment.newInstance(resId)
@@ -141,7 +141,7 @@ class RestaurantDtlFragment : Fragment() {
                 
                 binding.searchBoard.setOnClickListener { 
                     //해당 식당 게시글 목록으로 이동
-                    val fragment = HomeFragment.newInstance("",restaurantDto.res_id)
+                    val fragment = HomeFragment.newInstance("", restaurantDto.res_id)
                     parentFragmentManager.beginTransaction()
                         .add(R.id.fragmentContainer, fragment)
                         .addToBackStack("HomeFragment")

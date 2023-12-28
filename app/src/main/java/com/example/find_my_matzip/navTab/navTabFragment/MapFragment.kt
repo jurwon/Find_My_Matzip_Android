@@ -2,7 +2,6 @@ package com.example.find_my_matzip.navTab.navTabFragment
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,17 +17,15 @@ import com.example.find_my_matzip.HomeTabActivity
 import com.example.find_my_matzip.MyApplication
 import com.example.find_my_matzip.R
 import com.example.find_my_matzip.databinding.FragmentMapBinding
-import com.example.find_my_matzip.model.ResWithScoreDto
+import com.example.find_my_matzip.model.RestaurantDto
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
-import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +44,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private lateinit var searchBtn: Button
-    var restaurantsInsideCircle = mutableListOf<ResWithScoreDto>()
+    var restaurantsInsideCircle = mutableListOf<RestaurantDto>()
 
 
     private val PERMISSIONS = arrayOf(
@@ -103,10 +99,10 @@ class MapFragment : Fragment() , OnMapReadyCallback {
         val restaurantService = (context?.applicationContext as MyApplication).restaurantService
         val restaurantList = restaurantService.getAllRestaurantsByAvgScore()
 
-        restaurantList.enqueue(object : Callback<List<ResWithScoreDto>> {
+        restaurantList.enqueue(object : Callback<List<RestaurantDto>> {
             override fun onResponse(
-                call: Call<List<ResWithScoreDto>>,
-                response: Response<List<ResWithScoreDto>>
+                call: Call<List<RestaurantDto>>,
+                response: Response<List<RestaurantDto>>
             ) {
                 val restaurantList = response.body()
                 if (restaurantList != null && restaurantList.isNotEmpty()) {
@@ -132,7 +128,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
 //                            path.map = naverMap
 //
                             val bundle = Bundle().apply {
-                                putString("resInfoId", currentRestaurant.res_id)
+                                putLong("resInfoId", currentRestaurant.res_id)
                                 putString("resInfoName", currentRestaurant.res_name)
                                 putDouble("resInfoAvgScore", currentRestaurant.avgScore)
                                 putString("resInfoMenu", currentRestaurant.res_menu)
@@ -190,7 +186,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
                 }
             }
 
-            override fun onFailure(call: Call<List<ResWithScoreDto>>, t: Throwable) {
+            override fun onFailure(call: Call<List<RestaurantDto>>, t: Throwable) {
                 t.printStackTrace()
                 call.cancel()
                 Log.e("sdo", " 통신 실패")
@@ -276,7 +272,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
                 try {
                     val nearRestaurants = nearRestaurantList.await()
                     // 원 안에 있는 식당들을 저장할 배열
-                    val restaurantsInsideCircle = mutableListOf<ResWithScoreDto>()
+                    val restaurantsInsideCircle = mutableListOf<RestaurantDto>()
                     if (nearRestaurants != null && nearRestaurants.isNotEmpty()) {
                         for (currentRestaurant in nearRestaurants) {
                             val restaurantLatLng = LatLng(
@@ -317,7 +313,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
         return 1000 * Math.pow(2.0, 18 - zoomLevel)
     }
 
-    private fun showNearbyRestaurants(restaurants: List<ResWithScoreDto>) {
+    private fun showNearbyRestaurants(restaurants: List<RestaurantDto>) {
         val nearRestaurantFragment = NearRestaurantFragment()
         nearRestaurantFragment.restaurantsInsideCircle = restaurants
 

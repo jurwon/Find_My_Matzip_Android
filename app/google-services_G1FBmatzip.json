@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "913053831808",
+    "firebase_url": "https://matzip-f0092-default-rtdb.firebaseio.com",
+    "project_id": "matzip-f0092",
+    "storage_bucket": "matzip-f0092.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913053831808:android:b61f5c97a8c065a0b00c65",
+        "android_client_info": {
+          "package_name": "com.example.find_my_matzip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgXwReDF6rDnXZCAjqHnhhIY1eQSn89oQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

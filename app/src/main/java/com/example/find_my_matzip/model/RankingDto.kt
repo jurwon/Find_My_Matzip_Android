@@ -3,7 +3,7 @@ package com.example.find_my_matzip.model
 import com.google.gson.annotations.SerializedName
 
 data class RankingDto(
-    val resId:String,
+    val resId:Long,
     @SerializedName("res_name")
     val resName:String,
     val avgScore:Double,

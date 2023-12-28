@@ -45,10 +45,10 @@ class NewHomeFragment : Fragment() {
         }
     }
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            Log.d(TAG,"NewHomeFragment onCreate")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG,"NewHomeFragment onCreate")
         super.onCreate(savedInstanceState)
-            binding = FragmentNewHomeBinding.inflate(layoutInflater)
+        binding = FragmentNewHomeBinding.inflate(layoutInflater)
     }// 온크리트의 끝
 
     override fun onCreateView(

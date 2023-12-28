@@ -31,15 +31,15 @@ class     HomeFragment : Fragment() {
     private var text:String? = null
 
     //식당의 게시글 띄우는 로직
-    private var resId:String? = null
+    private var resId:Long? = null
 
     companion object {
         // HomeFragment 인스턴스 생성
-        fun newInstance(text: String, resId:String): HomeFragment {
+        fun newInstance(text: String, resId:Long): HomeFragment {
             val fragment = HomeFragment()
             val args = Bundle()
             args.putString("text", text)
-            args.putString("resId", resId)
+            args.putLong("resId", resId)
             Log.d("HomeFragment", "내가 newInstance에서 넣은 text : $text")
             Log.d("HomeFragment", "내가 newInstance에서 넣은 resId : $resId")
             fragment.arguments = args
@@ -78,7 +78,7 @@ class     HomeFragment : Fragment() {
         }
 
         //식당상세페이지에서 넘어왔다면
-        val check = arguments?.getString("resId")
+        val check = arguments?.getLong("resId")
         if(check != null){
             resId = check
         }
@@ -184,7 +184,7 @@ class     HomeFragment : Fragment() {
     private fun loadNextPageData(page: Int) {
         val boardService = (context?.applicationContext as MyApplication).boardService
 
-        if(text != null && resId.isNullOrEmpty()){
+        if(text != null && resId == 0L){
             // 검색 단어가 있을때
             Log.d(TAG, "검색중 $text")
             boardList = boardService.getSearchMainBoards("$text",page)
@@ -225,7 +225,7 @@ class     HomeFragment : Fragment() {
 
     //fragment전환
     private fun navigateSearchResult(text:String) {
-        val changeFragment = newInstance(text,"")
+        val changeFragment = newInstance(text,0L)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragmentContainer, changeFragment)
         .addToBackStack(null)

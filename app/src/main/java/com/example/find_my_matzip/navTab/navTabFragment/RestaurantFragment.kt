@@ -14,7 +14,7 @@ import com.example.find_my_matzip.HomeTabActivity
 import com.example.find_my_matzip.MyApplication
 import com.example.find_my_matzip.R
 import com.example.find_my_matzip.databinding.FragmentRestaurantBinding
-import com.example.find_my_matzip.model.ResWithScoreDto
+import com.example.find_my_matzip.model.RestaurantDto
 import com.example.find_my_matzip.navTab.adapter.RestaurantRecyclerAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,8 +24,8 @@ import retrofit2.Response
 class RestaurantFragment : Fragment() {
     lateinit var binding: FragmentRestaurantBinding
     lateinit var adapter: RestaurantRecyclerAdapter
-    lateinit var restaurantList: Call<List<ResWithScoreDto>>
-    lateinit var avgScoreList: Call<List<ResWithScoreDto>>
+    lateinit var restaurantList: Call<List<RestaurantDto>>
+    lateinit var avgScoreList: Call<List<RestaurantDto>>
     private var text:String? = null
     var isLoading = false
     var isLastPage = false
@@ -139,10 +139,10 @@ class RestaurantFragment : Fragment() {
         }
 
 
-        restaurantList.enqueue(object : Callback<List<ResWithScoreDto>> {
+        restaurantList.enqueue(object : Callback<List<RestaurantDto>> {
             override fun onResponse(
-                call: Call<List<ResWithScoreDto>>,
-                response: Response<List<ResWithScoreDto>>
+                call: Call<List<RestaurantDto>>,
+                response: Response<List<RestaurantDto>>
             ) {
                 isLoading = false
                 val restaurantList = response.body()
@@ -165,7 +165,7 @@ class RestaurantFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<ResWithScoreDto>>, t: Throwable) {
+            override fun onFailure(call: Call<List<RestaurantDto>>, t: Throwable) {
                 isLoading = false
                 t.printStackTrace()
                 call.cancel()

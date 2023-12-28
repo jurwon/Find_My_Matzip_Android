@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -14,15 +13,20 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.find_my_matzip.databinding.ActivityJoinBinding
+import com.example.find_my_matzip.model.Friend
 import com.example.find_my_matzip.model.UsersFormDto
 import com.example.find_my_matzip.utils.LoadingDialog
 import com.example.find_my_matzip.utils.PermissionManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +35,11 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 
+// sy FB
+private lateinit var auth: FirebaseAuth
+lateinit var database: DatabaseReference
+
+@Suppress("DEPRECATION")
 class JoinActivity : AppCompatActivity() {
     lateinit var binding: ActivityJoinBinding
     private val TAG: String = "JoinActivity"
@@ -40,17 +49,23 @@ class JoinActivity : AppCompatActivity() {
     private lateinit var imm: InputMethodManager
 
     // 갤러리에서 선택된 , 파일의 위치(로컬)
-    private var filePath : String? = null
+    private var filePath: String? = null
+
 
     // 카메라 이미지 파일 위치
-    lateinit var profileImageUri : String
-    //파이어베이스 사진 저장 경로
-    lateinit var imgStorageUrl:String
+    lateinit var profileImageUri: String
+
+    // 파이어베이스 사진 저장 경로
+    lateinit var imgStorageUrl: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = Firebase.auth
+        database = Firebase.database.reference
 
         //로딩 다이얼로그
         val loadingDialog = LoadingDialog(this)
@@ -68,7 +83,7 @@ class JoinActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             // it 이라는 곳에 사진 이미지가 있음.
-            if(it.resultCode === android.app.Activity.RESULT_OK) {
+            if (it.resultCode === android.app.Activity.RESULT_OK) {
                 // 이미지 불러오는 라이브러리 glide 사용하기, 코루틴이 적용이되어서, 매우 빠름.
                 // with(this) this 현재 액티비티 가리킴. 대신해서.
                 // 1) applicationContext
@@ -85,14 +100,16 @@ class JoinActivity : AppCompatActivity() {
 
                 // filePath, 갤러리에서 불러온 이미지 파일 정보 가져오기.
                 // 커서에 이미지 파일이름이 등록이 되어 있음.
-                val cursor = contentResolver.query(it.data?.data as Uri,
-                    arrayOf<String>(MediaStore.Images.Media.DATA),null,
-                    null,null);
+                val cursor = contentResolver.query(
+                    it.data?.data as Uri,
+                    arrayOf<String>(MediaStore.Images.Media.DATA), null,
+                    null, null
+                );
 
                 cursor?.moveToFirst().let {
                     filePath = cursor?.getString(0) as String
                 }
-                Log.d(TAG,"갤러리 filePath : ${filePath}")
+                Log.d(TAG, "갤러리 filePath : ${filePath}")
 
 
             } // 조건문 닫는 블록
@@ -103,7 +120,7 @@ class JoinActivity : AppCompatActivity() {
             // 샘플코드 처럼, 갤러리 호출, 호출된 이미지 선택 부분,
             val intent = Intent(Intent.ACTION_PICK)
             intent.setDataAndType(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*"
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*"
             )
             requestLauncher.launch(intent)
         }
@@ -117,12 +134,12 @@ class JoinActivity : AppCompatActivity() {
 
                 profileImageUri = Uri.fromFile(File(filePath)).toString()
 
-                Log.d(TAG,"profileImageUri : $profileImageUri")
+                Log.d(TAG, "profileImageUri : $profileImageUri")
 
                 Glide
                     .with(applicationContext)
                     .load(profileImageUri)
-                    .apply(RequestOptions().override(250,200))
+                    .apply(RequestOptions().override(250, 200))
                     .centerCrop()
                     .into(binding.resultUserImage)
 
@@ -145,10 +162,10 @@ class JoinActivity : AppCompatActivity() {
             // 일단, 날짜를 기준으로 사진의 파일명을 구분 짓기.
 
             //파일 이름 준비하기.
-            val timeStamp : String =
+            val timeStamp: String =
                 SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 
-            Log.d(TAG,"timeStamp : $timeStamp")
+            Log.d(TAG, "timeStamp : $timeStamp")
 
             // 촬영된 사진의 저장소 위치 정하기.
             // Environment.DIRECTORY_PICTURES : 정해진 위치, 갤러리
@@ -167,12 +184,12 @@ class JoinActivity : AppCompatActivity() {
             // 위에서 선언만하고, 실제 파일위치가 나올 이 때, 할당을 하는 구조.
             filePath = file.absolutePath
 
-            Log.d(TAG,"file.absolutePath : $filePath")
+            Log.d(TAG, "file.absolutePath : $filePath")
 
             //콘텐츠 프로바이더를 이용해서, 데이터를 가져와야 함.
             // provider에서 정한 authorities 값이 필요함.
             // 매니페스트 파일에 가서,
-            var photoURI:Uri = FileProvider.getUriForFile(
+            var photoURI: Uri = FileProvider.getUriForFile(
                 this@JoinActivity,
                 "com.example.find_my_matzip",
                 file
@@ -188,6 +205,8 @@ class JoinActivity : AppCompatActivity() {
         }
 
 
+        /* sy FB */
+        val intent = Intent(this, LoginActivity::class.java)
 
         //회원가입 버튼
         binding.buttonInsert.setOnClickListener {
@@ -196,11 +215,13 @@ class JoinActivity : AppCompatActivity() {
             val inputUserId = binding.userId.text.toString()
             val inputUserPw = binding.userPwd.text.toString()
             val inputUserName = binding.userName.text.toString()
+            val profileCheck = true
 
             Log.d(TAG, "회원가입 inputUserId: ${inputUserId}")
             Log.d(TAG, "회원가입 inputUserPw: ${inputUserPw}")
             Log.d(TAG, "회원가입 inputUserName: ${inputUserName}")
 
+            /*
             if(inputUserId == ""){
                 Toast.makeText(this@JoinActivity,"아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "회원가입 inputUserId: null")
@@ -209,40 +230,111 @@ class JoinActivity : AppCompatActivity() {
             if(inputUserPw == ""){
                 Toast.makeText(this@JoinActivity,"비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "회원가입 inputUserPw: null")
+
+            }
+
+            // Validation Check - UserPw
+            else if ( inputUserPw.length < 6 ) {
+                Toast.makeText(this@JoinActivity, "비밀번호를 6자 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
+            }
+
+            else {
                 return@setOnClickListener
             }
-            if(inputUserName == ""){
-                Toast.makeText(this@JoinActivity,"이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+
+             */
+
+
+
+            if (inputUserName == "") {
+                Toast.makeText(this@JoinActivity, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "회원가입 inputUserName: null")
                 return@setOnClickListener
             }
 
-            //로딩창 띄우기
+
+            // 로딩 창 띄우기
             loadingDialog.show()
+
 
             // 스토리지 접근 도구 ,인스턴스
             val storage = MyApplication.storage
             // 스토리지에 저장할 인스턴스
             val storageRef = storage.reference
 
+
             // 파일명 생성 : userid+현재시간
-           // val uuid = binding.userId.text.toString()+Date()+System.currentTimeMillis();
+            val uuid = binding.userId.text.toString() + Date() + System.currentTimeMillis();
 
 
             // 이미지 저장될 위치 및 파일명(파이어베이스)
             val imgRef = storageRef.child("users_img/${binding.userId.text}.jpg")
 
-            
+
             //입력된 이미지 있을때만 db에 이미지 경로 저장
-            if(filePath != null){
+            if (filePath != null) {
                 //이미지 url
-                imgStorageUrl = "https://firebasestorage.googleapis.com/v0/b/findmymatzip.appspot.com/o/users_img%2F${binding.userId.text}.jpg?alt=media"
-            }else{
+                imgStorageUrl =
+                    "https://firebasestorage.googleapis.com/v0/b/findmymatzip.appspot.com/o/users_img%2F${binding.userId.text}.jpg?alt=media"
+            } else {
                 imgStorageUrl = ""
             }
-            
 
-            //회원가입 요청할 user객체 구성
+
+            /* sy FB */
+            // if (inputUserId.isEmpty() && inputUserPw.isEmpty() && inputUserName.isEmpty() && profileCheck) {
+            if (inputUserId.isEmpty() && inputUserPw.isEmpty() && inputUserName.isEmpty()) {
+
+                    Toast.makeText(this, "아이디와 비밀번호, 프로필 사진을 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    Log.d("Email", "$inputUserId, $inputUserPw")
+                } else {
+                    if (!profileCheck) {
+                        Toast.makeText(this, "프로필 사진을 등록해주세요.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        auth.createUserWithEmailAndPassword(
+                            inputUserId.toString(),
+                            inputUserPw.toString()
+                        )
+                            .addOnCompleteListener(this) { task ->
+                                if (task.isSuccessful) {
+                                    val user = Firebase.auth.currentUser
+                                    val userId = user?.uid
+                                    val userIdSt = userId.toString()
+
+                                    val friend = Friend(inputUserId, inputUserPw, userIdSt)
+                                    database.child("users").child(userId.toString())
+                                        .setValue(friend)
+
+
+                                    /*
+                                FirebaseStorage.getInstance()
+                                    .reference.child("userImages").child("$userIdSt/photo").putFile(imageUri!!).addOnSuccessListener {
+                                        var userProfile: Uri? = null
+                                        FirebaseStorage.getInstance().reference.child("userImages").child("$userIdSt/photo").downloadUrl
+                                            .addOnSuccessListener {
+                                                userProfile = it
+                                                Log.d("이미지 URL", "$userProfile")
+                                                val friend = Friend(inputUserId.toString(), inputUserPw.toString(), userProfile.toString(), userIdSt)
+                                                database.child("users").child(userId.toString()).setValue(friend)
+                                            }
+                                    }
+                                */
+                                    Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                    Log.e(TAG, "$userId")
+                                    startActivity(intent)
+                                } else {
+                                    Log.e(TAG, "Registration failed", task.exception)
+                                    Toast.makeText(this, "등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                    }
+                }
+
+
+
+
+            // 회원가입 요청할 user객체 구성
             var usersFormDto = UsersFormDto(
                 userid = inputUserId,
                 user_pwd = inputUserPw,
@@ -253,6 +345,8 @@ class JoinActivity : AppCompatActivity() {
                 user_image = imgStorageUrl,
                 gender = getValue(binding.testRadioGroup),
             )
+
+
 
 
             val userService = (applicationContext as MyApplication).userService
@@ -270,19 +364,19 @@ class JoinActivity : AppCompatActivity() {
                         Log.d(TAG, "성공(newUsers_body) :  ${response.body().toString()}")
 
 
-                        //입력된 사진 있을때만 파이어베이스에 사진 저장
+                        // 입력된 사진 있을 때만 파이어베이스에 사진 저장
                         if(filePath != null){
                             //저장할 파일 불러오기
                             val file = Uri.fromFile(File(filePath))
 
-                            // 파이어베이스 스토리지에 업로드하는 함수.
+                            // 파이어베이스 스토리지에 업로드하는 함수
                             imgRef.putFile(file)
                                 // 업로드 후, 수행할 콜백 함수 정의. 실패했을 경우 콜백함수 정의
                                 .addOnCompleteListener{
                                     //로딩창 지우기
                                     loadingDialog.dismiss()
                                     Log.d(TAG, "스토리지 업로드 완료")
-                                   
+
                                 }
                                 .addOnFailureListener {
                                     //로딩창 지우기
@@ -294,12 +388,15 @@ class JoinActivity : AppCompatActivity() {
                                 }
                         }
 
+
+
                         Toast.makeText(this@JoinActivity,"회원가입 되었습니다.",Toast.LENGTH_SHORT).show()
-                        
+
                         val intent = Intent(this@JoinActivity, LoginActivity::class.java)
                         startActivity(intent)
 
                     }else {
+
                         Log.d(TAG, "서버 응답 실패: ${response.code()}")
                         //로딩창 지우기
                         loadingDialog.dismiss()
@@ -330,56 +427,59 @@ class JoinActivity : AppCompatActivity() {
 
 
             })
-        }//회원가입
 
-        //주소 검색후 결과값 받아오는 후처리 함수
-        val getSearchResult = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                if (result.data != null) {
-                    val data = result.data!!.getStringExtra("data")
-                    binding.searchAddress.setText(data)
+            }//회원가입
+
+            //주소 검색후 결과값 받아오는 후처리 함수
+            val getSearchResult = registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult()
+            ) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    if (result.data != null) {
+                        val data = result.data!!.getStringExtra("data")
+                        binding.searchAddress.setText(data)
+                    }
                 }
             }
+
+
+            //주소 검색
+            binding.searchAddress.setOnClickListener {
+                //주소 검색 화면으로 이동
+                val intent = Intent(this@JoinActivity, SearchAddressActivity::class.java)
+                getSearchResult.launch(intent)
+            }
+
+            //설정 3)
+            binding.root.setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    // Hide the keyboard when the user clicks outside of the EditText
+                    val view = this.currentFocus
+                    if (view != null) {
+                        imm.hideSoftInputFromWindow(view.windowToken, 0)
+                    }
+                }
+                false
+            }
+
+
         }
 
 
-        //주소 검색
-        binding.searchAddress.setOnClickListener{
-            //주소 검색 화면으로 이동
-            val intent = Intent(this@JoinActivity, SearchAddressActivity::class.java)
-            getSearchResult.launch(intent)
-        }
-
-        //설정 3)
-        binding.root.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                // Hide the keyboard when the user clicks outside of the EditText
-                val view = this.currentFocus
-                if (view != null) {
-                    imm.hideSoftInputFromWindow(view.windowToken, 0)
-                }
+        //성별
+        fun getValue(v: View?): String? {
+            val male = binding.radio1
+            val female = binding.radio2
+            var pickValue: String? = null
+            if (male.isChecked) {
+                pickValue = male.text.toString()
+            } else if (female.isChecked) {
+                pickValue = female.text.toString()
             }
-            false
+            return pickValue
         }
 
 
     }
 
 
-    //성별
-    fun getValue(v: View?): String? {
-        val male = binding.radio1
-        val female = binding.radio2
-        var pickValue: String? = null
-        if (male.isChecked) {
-            pickValue = male.text.toString()
-        } else if (female.isChecked) {
-            pickValue = female.text.toString()
-        }
-        return pickValue
-    }
-
-
-}

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class BoardDto(
     val id: Long,
-    val resId: String,
+    val resId: Long,
     @SerializedName("user_id")
     val userId: String,
 //    val boardViewStatus: String?, // 이 부분은 서버 응답에 따라 실제 타입 확인이 필요할 수 있습니다.

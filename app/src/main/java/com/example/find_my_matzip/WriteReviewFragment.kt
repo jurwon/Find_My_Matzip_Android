@@ -1,7 +1,6 @@
 package com.example.find_my_matzip
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -12,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -21,7 +19,6 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.find_my_matzip.databinding.FragmentProfileUpdateBinding
 import com.example.find_my_matzip.databinding.FragmentWriteReviewBinding
 import com.example.find_my_matzip.model.BoardImgDto
 import com.example.find_my_matzip.model.ProfileDto
@@ -73,11 +70,11 @@ class WriteReviewFragment : Fragment() {
     lateinit var uploadedImg : BoardImgDto
 
     companion object {
-        fun newInstance(resId: String): WriteReviewFragment {
+        fun newInstance(resId: Long?): WriteReviewFragment {
             Log.d("SdoLifeCycle","WriteReviewFragment newInstance")
             val fragment = WriteReviewFragment()
             val args = Bundle()
-            args.putString("resId", resId)
+            args.putLong("resId", resId!!)
             fragment.arguments = args
             return fragment
         }
@@ -91,7 +88,7 @@ class WriteReviewFragment : Fragment() {
         Log.d("SdoLifeCycle","WriteReviewFragment onCreateView")
         binding = FragmentWriteReviewBinding.inflate(layoutInflater,container,false)
         // 이전 프래그먼트에서 전달된 resId 가져오기
-        val resId = arguments?.getString("resId")
+        val resId = arguments?.getLong("resId")
 
         // 로그인한 사용자의 아이디를 가져와서 해당 사용자의 프로필 정보를 서버에서 조회
         val userId = SharedPreferencesManager.getString("id","")

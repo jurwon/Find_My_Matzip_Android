@@ -35,7 +35,7 @@ class ResInfoFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_res_info, container, false)
 
-        val resInfoId = arguments?.getString("resInfoId")
+        val resInfoId = arguments?.getLong("resInfoId")
 //        rootView.findViewById<LinearLayout>(R.id.toResDtl).setOnClickListener {
 //            val bundle = Bundle()
 //            bundle.putString("resId", resInfoId)
@@ -76,13 +76,10 @@ class ResInfoFragment : Fragment() {
             .into(imageView)
 
         // toResDtl 클릭 이벤트 핸들러
-        fun navigateToResDetail(resId: String?) {
-            if (resId.isNullOrEmpty()) {
-                Log.d("resId", "resId is null or empty")
-                return
-            }
+        fun navigateToResDetail(resId: Long) {
 
-            val fragment = RestaurantDtlFragment.newInstance(resId)
+            //           val fragment = resId?.let { RestaurantDtlFragment.newInstance(it) }
+        val fragment = RestaurantDtlFragment.newInstance(resId)
             val transaction = parentFragmentManager.beginTransaction()
 
             // 기존의 프래그먼트를 숨기고 새로운 프래그먼트를 표시
@@ -90,15 +87,19 @@ class ResInfoFragment : Fragment() {
                 transaction.hide(existingFragment)
             }
 
-            transaction
-                .add(R.id.fragmentContainer, fragment)  // 추가된 부분
-                .addToBackStack(null)
-                .commit()
+            if (fragment != null) {
+                transaction
+                    .add(R.id.fragmentContainer, fragment)  // 추가된 부분
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 
         rootView.findViewById<LinearLayout>(R.id.toResDtl).setOnClickListener {
             val resId = resInfoId
-            navigateToResDetail(resId)
+            if (resId != null) {
+                navigateToResDetail(resId)
+            }
         }
         // toResDtl 클릭 이벤트 핸들러
 

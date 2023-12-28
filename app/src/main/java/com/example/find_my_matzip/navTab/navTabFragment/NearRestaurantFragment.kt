@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.find_my_matzip.R
 import com.example.find_my_matzip.databinding.FragmentNearRestaurantBinding
-import com.example.find_my_matzip.model.ResWithScoreDto
+import com.example.find_my_matzip.model.RestaurantDto
 import com.example.find_my_matzip.navTab.adapter.NearRestaurantRecyclerAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,7 +18,7 @@ class NearRestaurantFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentNearRestaurantBinding
     lateinit var adapter: NearRestaurantRecyclerAdapter
-    var restaurantsInsideCircle: List<ResWithScoreDto> = emptyList() // 이 부분을 추가하고 초기화
+    var restaurantsInsideCircle: List<RestaurantDto> = emptyList() // 이 부분을 추가하고 초기화
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

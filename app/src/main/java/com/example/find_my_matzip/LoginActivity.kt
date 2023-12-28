@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.find_my_matzip.databinding.ActivityLoginBinding
@@ -18,10 +18,16 @@ import com.example.find_my_matzip.model.ResultDto
 import com.example.find_my_matzip.retrofit.UserService
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
 import com.example.find_my_matzip.utils.LoadingDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// sy FB
+private lateinit var auth: FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private val TAG: String = "LoginActivity"
@@ -33,9 +39,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var imm: InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // sy FB
+        auth = Firebase.auth
 
         //로딩 다이얼로그
         val loadingDialog = LoadingDialog(this)
@@ -48,6 +58,27 @@ class LoginActivity : AppCompatActivity() {
 
         //시스템에 있는 액션바에 업버튼 붙이기
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
+        // sy FB
+        binding.loginBtn.setOnClickListener{
+
+            val loginId = binding.userId
+            val loginPw = binding.userPwd
+
+            if(loginId.text.isEmpty() && loginPw.text.isEmpty()) {
+                Toast.makeText(this, "아이디와 비밀번호를 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Log.d("Email", "$loginId, $loginPw")
+                loginId.setText("")
+                loginPw.setText("")
+            }
+            else{
+                signIn(loginId.text.toString(), loginPw.text.toString())
+            }
+        }
+
+
 
         //로그인 버튼 클릭시
         binding.loginBtn.setOnClickListener {
@@ -131,6 +162,9 @@ class LoginActivity : AppCompatActivity() {
             })
         }
 
+
+
+
         //회원가입창으로 이동
         binding.joinUs.setOnClickListener{
             val intent = Intent(this@LoginActivity, JoinActivity::class.java)
@@ -150,6 +184,31 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }//onCreate
+
+    // sy FB
+    private fun signIn(email: String, password: String) {
+        val intent = Intent(this, HomeTabActivity::class.java)
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d("로그인", "성공")
+                    val user = auth.currentUser
+                    updateUI(user)
+                    finish()
+                    startActivity(intent)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(this, "정확한 아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    Log.d("로그인", "실패")
+                    updateUI(null)
+                }
+            }
+    }
+    private fun updateUI(user: FirebaseUser?) {
+
+    }
+
 
     // 로그인 성공/실패 시 다이얼로그를 띄워주는 메소드
     private fun showDialog(type: String) {

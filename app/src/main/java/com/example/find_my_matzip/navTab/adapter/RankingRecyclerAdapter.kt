@@ -39,7 +39,7 @@ class RankingRecyclerAdapter(val context: RankingFragment, val datas: List<Ranki
         // 번호 설정 (1부터 시작하도록 +1)
         binding.numberTextView.text = (position + 1).toString()
 
-        binding.resId.text = Item?.resId
+        binding.resId.text = Item?.resId.toString()
         binding.resName.text = Item?.resName
         binding.avgScore.text = Item?.avgScore.toString()
 
@@ -54,7 +54,9 @@ class RankingRecyclerAdapter(val context: RankingFragment, val datas: List<Ranki
 
             // 데이터를 전달하기 위한 Bundle 생성
             val bundle = Bundle().apply {
-                putString("resId", resId)
+                if (resId != null) {
+                    putLong("resId", resId)
+                }
             }
 
             // RestaurantDtlFragment의 인스턴스 생성

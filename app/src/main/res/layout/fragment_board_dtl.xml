@@ -201,24 +201,56 @@
                     android:progressTint="#E91E63"
                     android:numStars="5"
                     android:rating="0"
-                    android:stepSize="1" />
+                    android:stepSize="1"/>
 
-<!--                <TextView-->
-<!--                    android:id="@+id/boardScore"-->
-<!--                    android:textSize="20dp"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/nexonbold"-->
-<!--                    android:gravity="right"-->
-<!--                    android:text="Default" />-->
+                <!--빈 공간 -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
-<!--                <TextView-->
-<!--                    android:textSize="20dp"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:gravity="center|right"-->
-<!--                    android:fontFamily="@font/nexonbold"-->
-<!--                    android:text="점" />-->
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_weight="0">
+                    <ImageView
+                        android:id="@+id/likeBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/baseline_thumb_up_off_alt_24"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/countLike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textSize="15sp"
+                        android:text="0"
+                        android:layout_gravity="center_vertical">
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/dislikeBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/baseline_thumb_down_off_alt_24"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/countDislike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textSize="15sp"
+                        android:text="0"
+                        android:layout_gravity="center_vertical">
+                    </TextView>
+
+                </LinearLayout>
             </LinearLayout>
 
 

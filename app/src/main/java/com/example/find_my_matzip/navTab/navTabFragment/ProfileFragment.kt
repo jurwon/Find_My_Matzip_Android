@@ -1,7 +1,7 @@
 package com.example.find_my_matzip.navTab.navTabFragment
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
+//import android.os.Build.VERSION_CODES.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,20 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.find_my_matzip.HomeTabActivity
 import com.example.find_my_matzip.MyApplication
 import com.example.find_my_matzip.R
 import com.example.find_my_matzip.databinding.FragmentProfileBinding
 import com.example.find_my_matzip.model.FollowDto
-import com.example.find_my_matzip.model.FollowingDto
 import com.example.find_my_matzip.model.ProfileDto
-import com.example.find_my_matzip.navTab.adapter.BoardRecyclerAdapter
 import com.example.find_my_matzip.navTab.adapter.BoardRecyclerAdapter2
 import com.example.find_my_matzip.navTab.adapter.ProfileAdapter2
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
@@ -239,6 +237,52 @@ class ProfileFragment : Fragment() {
                                         })
                                 }
                             }
+
+
+                            // MessageFragment로 이동
+                            val messageBtn: ImageView = binding.messageBtn
+                            messageBtn.setOnClickListener {
+                                Log.d("MessageFragment", "메시지 버튼 클릭")
+
+                                pageUserId?.let { toUserId ->
+                                    userService.deleteFollow(toUserId)
+                                        .enqueue(object : Callback<Unit> {
+                                            override fun onResponse(
+                                                call: Call<Unit>,
+                                                response: Response<Unit>
+                                            ) {
+                                                Log.d("MessageFragment", "메시지 onResponse: ${response.code()}")
+                                                if (response.isSuccessful) {
+                                                    // 성공한 경우
+                                                    followBtn.visibility = View.VISIBLE
+                                                    unfollowBtn.visibility = View.GONE
+                                                    // 현재의 프래그먼트 제거
+                                                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                                                    transaction.remove(this@ProfileFragment).commit()
+
+                                                    // 새로운 인스턴스 생성 및 추가
+                                                    val newFragment = MessageFragment.newInstance()
+                                                    val newTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                                                    newTransaction.add(R.id.fragmentContainer, newFragment)
+                                                    newTransaction.addToBackStack(null)
+                                                    newTransaction.commit()
+                                                } else {
+                                                    Log.d("MessageFragment", "메시지 요청 실패")
+                                                }
+                                            }
+
+                                            override fun onFailure(
+                                                call: Call<Unit>,
+                                                t: Throwable?
+                                            ) {
+                                                // 네트워크 오류 등 예외 처리
+                                            }
+                                        })
+                                }
+                            }
+
+
+
 
 
                             // 팔로워 팔로우수

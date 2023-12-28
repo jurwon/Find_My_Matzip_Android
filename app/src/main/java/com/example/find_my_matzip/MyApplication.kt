@@ -23,7 +23,8 @@ class MyApplication : MultiDexApplication() {
     //통신에 필요한 인스턴스 선언 & 초기화
     var userService: UserService
     val restaurantService: RestaurantService
-    var boardService : BoardService
+    val boardService : BoardService
+    val feelingService:FeelingService
 
     //인터셉터 생성
     //패킷 보낼때마다 header에 token 붙이는 코드 작성시 중복코드 너무 많이 생김
@@ -45,6 +46,7 @@ class MyApplication : MultiDexApplication() {
         userService = retrofit.create(UserService::class.java)
         restaurantService = retrofit.create(RestaurantService::class.java)
         boardService = retrofit.create(BoardService::class.java)
+        feelingService = retrofit.create(FeelingService::class.java)
     }
 
     // 생명주기, 최초 1회 동작을 합니다.

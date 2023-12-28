@@ -30,7 +30,7 @@ interface BoardService {
 
     //식당상세페이지에서 게시글목록 불러오기
     @GET("pagerbleResBoard/{redId}")
-    fun getSearchResBoards(@Path("redId") redId : String,
+    fun getSearchResBoards(@Path("redId") redId : Long,
                             @Query("page") page: Int): Call<List<MainBoardDto>>
 
 
@@ -46,7 +46,7 @@ interface BoardService {
 
     @POST("board/new3/{resId}")// 게시글작성페이지
     fun createBoard3(
-        @Path("resId") id: String, @Body boardDtoMap: MutableMap<String,Any>
+        @Path("resId") id: Long, @Body boardDtoMap: MutableMap<String,Any>
     ): Call<Unit>
 //    @GET("board/829") // 게시글 상세페이지;
 //    fun getBoardDtl(): Call<BoardDtlDto>
