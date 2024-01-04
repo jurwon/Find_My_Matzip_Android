@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="@drawable/top_radius_white_background" >
+        >
+    <TextView
+            android:id="@+id/bottomSheetTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="댓글"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="80dp"
+            />
+
+    <LinearLayout
+        android:id="@+id/saveComment"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+
+            app:cardCornerRadius="75dp">
+
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile" />
+        </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="">
+    </TextView>
+        <EditText
+            android:id="@+id/commentContents"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:layout_gravity="center"
+            android:background="@drawable/radius"
+            android:fontFamily="@font/nexonlight"
+            android:paddingLeft="30dp"
+            android:hint="댓글을 입력해주세요"
+            android:textColor="#5E5D5D"
+            android:textSize="15sp"
+            android:ems="10"
+            android:layout_marginRight="5dp"
+            />
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="작성"
+            android:layout_marginRight="5dp"
+            />
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

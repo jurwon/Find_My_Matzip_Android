@@ -6,21 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.find_my_matzip.MyApplication
 import com.example.find_my_matzip.R
+import com.example.find_my_matzip.UpdateReviewFragment
 import com.example.find_my_matzip.databinding.FragmentBoardDtlBinding
 import com.example.find_my_matzip.model.BoardDtlDto
+import com.example.find_my_matzip.model.CommentDto
 import com.example.find_my_matzip.navTab.adapter.BoardDtlViewPagerAdapter
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+
 class boardDtlFragment : Fragment() {
     lateinit var binding: FragmentBoardDtlBinding
     private val TAG: String = "boardDtlFragment"
     private var myFeeling = 0
+    private lateinit var AllComment: TextView
+
+    // 로그인한 사용자의 아이디를 가져와서 해당 사용자의 프로필 정보를 서버에서 조회
+    val loginuserId = SharedPreferencesManager.getString("id","")
 
     companion object {
         fun newInstance(boardId: String): boardDtlFragment {
@@ -60,8 +69,6 @@ class boardDtlFragment : Fragment() {
                 Log.d("kkt","데이터 도착 확인2. : BoardDtlDto.board ${boardDto?.board}")
                 Log.d("kkt","데이터 도착 확인3. : BoardDtlDto.restaurant ${boardDto?.restaurant}")
                 Log.d("kkt","데이터 도착 확인4. : BoardDtlDto.users ${boardDto?.users}")
-//                    Log.d("kkt","데이터 도착 확인5. : BoardDtlDto ${boardDto?.score}")
-//                    Log.d("kkt","데이터 도착 확인6. : BoardDtlDto ${boardDto?.resId}")
 
                 binding.boardDtlTitle.text = boardDto?.board?.boardTitle.toString()
                 binding.boardDtlContent.text = boardDto?.board?.content.toString()
@@ -74,7 +81,6 @@ class boardDtlFragment : Fragment() {
                         .override(900, 900)
                         .into(binding.userProfileImg)
                 }
-
                 //좋아요&싫어요
                 binding.countLike.text = boardDto?.feelingBoardDtlDto?.likeCount.toString()
                 binding.countDislike.text = boardDto?.feelingBoardDtlDto?.dislikeCount.toString()
@@ -89,6 +95,10 @@ class boardDtlFragment : Fragment() {
                         binding.dislikeBtn.setImageResource(R.drawable.baseline_thumb_down_alt_24)//싫어요
                         myFeeling = -1
                     }
+                }
+
+                if(boardDto?.board?.userId == loginuserId){
+                    binding.manageReview.visibility = View.VISIBLE
                 }
 
 
@@ -134,6 +144,19 @@ class boardDtlFragment : Fragment() {
                     }
                 }
 
+                fun navigateToUpdateBoard(boardId: String?) {
+                    if (boardId.isNullOrEmpty()) {
+                        Log.d("kkt", "boardId is null or empty")
+                        return
+                    }
+
+                    val fragment = UpdateReviewFragment.newInstance(boardId)
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                }
+
                 binding.toResDtl.setOnClickListener {
                     Log.d("kkt", "식당가기 클릭됨")
                     Log.d("kkt", "resId: ${boardDto?.restaurant?.res_id}")
@@ -141,6 +164,26 @@ class boardDtlFragment : Fragment() {
                     if (resId != null) {
                         navigateToResDetail(resId)
                     }
+                }
+                // toResDtl 클릭 이벤트 핸들러
+
+                //캐시지우기
+                val directory = File(requireContext().cacheDir, "images")
+
+                binding.updateReview.setOnClickListener {
+                    if (directory.exists()) {
+                        val files = directory.listFiles()
+                        if (files != null) {
+                            for (file in files) {
+                                file.delete()
+                            }
+                        }
+                        directory.delete()
+                    }
+                    Log.d("kkt", "게시글 수정 클릭됨")
+                    Log.d("kkt", "boardId: ${boardDto?.board?.id}")
+                    val boardId = boardDto?.board?.id.toString()
+                    navigateToUpdateBoard(boardId)
                 }
                 // toResDtl 클릭 이벤트 핸들러
 
@@ -169,6 +212,50 @@ class boardDtlFragment : Fragment() {
                     transaction.addToBackStack(null) //백스택에 지금 재배치한 fragment추가
                     transaction.commit()
 
+                }
+                fun getTotalCommentCount(comments: List<CommentDto>): Int {
+                    var totalCount = comments.size
+                    for (comment in comments) {
+                        if (comment.children != null) {
+                            totalCount += getTotalCommentCount(comment.children)
+                        }
+                    }
+                    return totalCount
+                }
+                binding.AllComment.text = "댓글 (${getTotalCommentCount(boardDto?.commentsPage?.content ?: emptyList())}개) 모두보기"
+
+
+//                CoroutineScope(Dispatchers.Main).launch {
+//                    try {
+//                        showNearbyRestaurants(restaurantsInsideCircle)
+//                    }
+                AllComment = binding.AllComment
+                binding.AllComment.setOnClickListener {
+                    val boardId = boardDto?.board?.id.toString() // 게시판 아이디 가져오기
+                    Log.d(TAG, "AllComment 클릭! . boardId: $boardId")
+
+                    // 추가하기 전에 프래그먼트가 이미 추가되어 있는지 확인
+                    val existingFragment = parentFragmentManager.findFragmentByTag(CommentFragment::class.java.simpleName)
+
+                    if (existingFragment == null) {
+                        if (boardId != null) {
+                            // 프래그먼트가 추가되지 않은 경우, 추가합니다.
+                            val commentFragment = CommentFragment.newInstance(boardId)
+
+                            // FragmentTransaction을 사용하여 CommentListFragment를 표시하는 코드를 작성
+                            val transaction = fragmentManager?.beginTransaction()
+
+                            // 현재 Fragment를 숨기고 CommentListFragment를 추가
+                            transaction?.hide(this@boardDtlFragment)
+                            transaction?.add(R.id.fragmentContainer, commentFragment)
+
+                            // addToBackStack을 사용하여 뒤로 가기 스택에 추가 (선택 사항)
+                            transaction?.addToBackStack(null)
+
+                            // 변경사항을 즉시 적용
+                            transaction?.commit()
+                        }
+                    }
                 }
 
                 //유저 정보 클릭
@@ -262,9 +349,6 @@ class boardDtlFragment : Fragment() {
         })
 
     }
-
-
-
     @Override
     override fun onResume() {
         Log.d("SdoLifeCycle","boardDtlFragment onResume")

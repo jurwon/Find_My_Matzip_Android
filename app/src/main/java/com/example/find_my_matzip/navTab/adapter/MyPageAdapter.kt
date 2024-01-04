@@ -3,25 +3,22 @@ package com.example.find_my_matzip.navTab.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.find_my_matzip.databinding.FragmentMyPageBinding
-import com.example.find_my_matzip.databinding.FragmentProfileBinding
 import com.example.find_my_matzip.model.PageUserDto
 
 import com.example.find_my_matzip.navTab.navTabFragment.MyPageFragment
-import com.example.find_my_matzip.navTab.navTabFragment.ProfileFragment
 
 
-class ProfileViewHoder2(val binding: FragmentProfileBinding) : RecyclerView.ViewHolder(binding.root)
+class MyPageViewHoder(val binding: FragmentMyPageBinding) : RecyclerView.ViewHolder(binding.root)
 //class ProfileAdapter(private val fragment: MyPageFragment, private val profileList
 //: List<ProfileDto>) : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>()
 
-class ProfileAdapter2 (val context: ProfileFragment,val datas: List<PageUserDto>?)
+class MyPageAdapter (val context: MyPageFragment,val datas: List<PageUserDto>?)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ProfileViewHoder2(
-            FragmentProfileBinding.inflate(
+        return MyPageViewHoder(
+            FragmentMyPageBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )

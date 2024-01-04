@@ -75,7 +75,7 @@ class NewHomeFragment : Fragment() {
         }
 
         binding.toFollowHome.setOnClickListener {
-            // 클릭 시 HomeFollowFragment로 이동하는 코드
+            // 클릭 시 HomeFollowFragment로 이동하는 코드F
             val fragment = NewHomeFollowFragment()
 
             // 트랜잭션에 이름 부여

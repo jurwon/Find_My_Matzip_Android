@@ -35,15 +35,17 @@ class NewHomeViewPagerAdapter(private val context: Context, private val boardImg
         val imageInfo = boardImgDtoList[position]
 
         if (imageInfo.imgUrl.isNotEmpty()) {
-            if (imageInfo.repImgYn == "Y") {
-                holder.loadImage(imageInfo.imgUrl)
-            } else {
-                val img = boardImgDtoList.firstOrNull { it.imgUrl.isNotEmpty() && it.repImgYn == "N" }
-                img?.let { holder.loadImage(it.imgUrl) }
+            if (position == 0 && imageInfo.repImgYn == "Y") {
+                holder.loadImage(imageInfo.imgUrl) // 첫 번째 이미지, repImgYn이 "Y"인 경우
+            } else if (position > 0) {
+                val nonRepImages = boardImgDtoList.filter { it.repImgYn == "N" }
+                val nonRepPosition = position - 1 // 첫 번째 이미지 이후의 위치를 계산
+                if (nonRepPosition < nonRepImages.size) {
+                    holder.loadImage(nonRepImages[nonRepPosition].imgUrl)
+                }
             }
         }
     }
-
     override fun getItemCount(): Int {
 //        return minOf(boardImgDtoList.size, 5)
         //이미지 url이 있을때만 뷰페이저아이템만들기
@@ -70,6 +72,8 @@ class NewHomeViewPagerAdapter(private val context: Context, private val boardImg
             Glide.with(context)
                 .load(imageUrl)
                 .placeholder(R.drawable.readyimg)
+//                .centerCrop()
+//                .fitCenter()
                 .error(R.drawable.noimg)
                 .into(imageView)
         }

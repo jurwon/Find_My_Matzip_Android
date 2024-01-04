@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/imageArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:scaleType="center" />
+
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right"
+        android:background="@drawable/baseline_cancel_24"
+        tools:ignore="RtlHardcoded" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"> <!-- 배경색은 필요한 색상으로 변경 -->
+
+        <TextView
+            android:id="@+id/refImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nexonbold"
+            android:text="대표 이미지"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:background="#80FFFFFF"
+            android:gravity="center"
+            android:visibility="gone"
+            /> <!-- 가운데 정렬 -->
+
+    </LinearLayout>
+
+</FrameLayout>

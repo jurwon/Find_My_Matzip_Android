@@ -1,6 +1,7 @@
 package com.example.find_my_matzip.retrofit
 
 import com.example.find_my_matzip.model.LoginDto
+import com.example.find_my_matzip.model.MainBoardUserDto
 import com.example.find_my_matzip.model.ProfileDto
 import com.example.find_my_matzip.model.ResultDto
 import com.example.find_my_matzip.model.UserListModel
@@ -39,7 +40,6 @@ interface UserService {
 
 //    @GET("users/profile/{pageUserid}")
 //    fun getProfile(@Path("pageUserid"),@Query("page"), pageUserid: String?): Call<ProfileDto>
-//
 
     @GET("users/profile/{pageUserid}")
     fun getProfile(
@@ -57,6 +57,9 @@ interface UserService {
     @GET("/users/insertFollow/{toUserId}")
     fun insertFollow(@Path("toUserId") toUserId: String): Call<Unit>
 
+    @GET("/users/getAllUsers/{text}")
+    fun getAllUsers(@Path("text") text : String,
+                    @Query("page") page: Int): Call<List<UsersFormDto>>
 
 
 }

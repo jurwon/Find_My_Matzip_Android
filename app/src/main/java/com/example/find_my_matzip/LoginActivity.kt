@@ -119,6 +119,14 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d(TAG, "로그인 성공")
                                 val autoLogin = binding.autoLoginBtn.isChecked
 
+                                if(SharedPreferencesManager.getString("id","") == loginId ){
+                                    // 로그인된 유저 정보 저장
+                                    SharedPreferencesManager.setLoginInfo(loginId,loginPw,token,autoLogin);
+                                }else{
+                                    //검색기록삭제 + id 갱신
+                                    SharedPreferencesManager.clearSearchPreferences()
+                                    SharedPreferencesManager.setLoginInfo(loginId,loginPw,token,autoLogin);
+                                }
                                 // 로그인된 유저 정보 저장
                                 SharedPreferencesManager.setLoginInfo(loginId,loginPw,token,autoLogin);
 
@@ -216,7 +224,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (type == "success") {
             dialogBuilder.setTitle("로그인 성공")
-            dialogBuilder.setMessage("로그인 성공!")
+            dialogBuilder.setMessage("환영합니다!")
         } else if (type == "fail") {
             dialogBuilder.setTitle("로그인 실패")
             dialogBuilder.setMessage("아이디와 비밀번호를 확인해주세요")

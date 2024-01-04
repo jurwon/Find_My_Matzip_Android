@@ -21,7 +21,7 @@ class ForcedTerminationService : Service() {
         //로그인시 자동 로그인 체크 안했다면
         if(!autoLogin){
             //앱이 강제종료되면 SharedPreference 초기화
-            SharedPreferencesManager.clearPreferences()
+            SharedPreferencesManager.clearLoginPreferences()
         }
         stopSelf()		//Service도 종료
     }

@@ -26,7 +26,7 @@ import com.example.find_my_matzip.model.FollowDto
 import com.example.find_my_matzip.model.FollowingDto
 import com.example.find_my_matzip.model.ProfileDto
 import com.example.find_my_matzip.navTab.adapter.BoardRecyclerAdapter
-import com.example.find_my_matzip.navTab.adapter.ProfileAdapter
+import com.example.find_my_matzip.navTab.adapter.MyPageAdapter
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
 import com.example.find_my_matzip.utils.CustomDialog
 import retrofit2.Call
@@ -36,7 +36,7 @@ import retrofit2.Response
 
 class MyPageFragment : Fragment() {
     lateinit var binding: FragmentMyPageBinding
-    lateinit var adapter: ProfileAdapter
+    lateinit var adapter: MyPageAdapter
     lateinit var boardAdapter: BoardRecyclerAdapter
     var isLoading = false
     var isLastPage = false
@@ -162,7 +162,6 @@ class MyPageFragment : Fragment() {
 
 
                     // 다른 필요한 데이터들도 똑같이 설정
-
                     if(profileDto.pageUserDto.user_image != ""){
                         Glide.with(requireContext())
                             .load(profileDto.pageUserDto.user_image)

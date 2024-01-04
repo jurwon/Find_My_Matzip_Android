@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_primary"
                     android:fontFamily="@font/nexonmed"
-                    android:text="프로필편집"
+                    android:text="프로필 편집"
                     android:visibility="visible"
                     android:layout_marginRight="5dp"></Button>
                 <Button
@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/black"
                     android:fontFamily="@font/nexonmed"
-                    android:text="게시글작성"
+                    android:text="메시지 보내기"
                     android:visibility="visible"></Button>
 
             </LinearLayout>

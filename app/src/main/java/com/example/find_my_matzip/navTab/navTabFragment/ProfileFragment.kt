@@ -22,7 +22,7 @@ import com.example.find_my_matzip.databinding.FragmentProfileBinding
 import com.example.find_my_matzip.model.FollowDto
 import com.example.find_my_matzip.model.ProfileDto
 import com.example.find_my_matzip.navTab.adapter.BoardRecyclerAdapter2
-import com.example.find_my_matzip.navTab.adapter.ProfileAdapter2
+import com.example.find_my_matzip.navTab.adapter.ProfileAdapter
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
 import com.example.find_my_matzip.utils.CustomDialog
 import retrofit2.Call
@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
     }
 
     lateinit var binding: FragmentProfileBinding
-    lateinit var adapter: ProfileAdapter2
+    lateinit var adapter: ProfileAdapter
     lateinit var boardAdapter: BoardRecyclerAdapter2
     var isLoading = false
     var isLastPage = false
@@ -321,7 +321,7 @@ class ProfileFragment : Fragment() {
 
                             val newBoardList = profileDto.boards.content
                             if (newBoardList.isNotEmpty() && currentPage == 0) {
-                            ProfileAdapter2(this@ProfileFragment, listOf(profileDto.pageUserDto))
+                            ProfileAdapter(this@ProfileFragment, listOf(profileDto.pageUserDto))
                             boardAdapter = BoardRecyclerAdapter2(this@ProfileFragment, profileDto.boards.content)
                                 currentPage++
 

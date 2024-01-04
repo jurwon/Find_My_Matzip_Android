@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<ScrollView
-    android:background="#FFFFFF"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".navTab.navTabFragment.boardDtlFragment">
+    <ScrollView
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".navTab.navTabFragment.boardDtlFragment">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,6 +52,31 @@
                     android:layout_gravity="center_vertical"
                     android:text="사용자 이름" />
 
+                <LinearLayout
+                    android:id="@+id/manageReview"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    >
+
+                    <Button
+                        android:id="@+id/updateReview"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="수정" />
+
+                    <Button
+                        android:backgroundTint="@color/black"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/deleteReview"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="삭제" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -74,8 +99,7 @@
                     android:id="@+id/DtlViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/readyimg" />
+                    android:scaleType="fitXY" />
                 <!-- 인디케이터 -->
                 <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/dots_indicator"
@@ -281,45 +305,21 @@
                     android:lineSpacingExtra="5dp"
                     android:text="Content"
                     android:layout_marginTop="15dp"/>
-
+                <TextView
+                    android:id="@+id/AllComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/nexonbold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="댓글갯수" />
 
             </LinearLayout>
 
 
 
-
-
-            <!--버튼 목록-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:layout_gravity="center"-->
-<!--                >-->
-<!--                <Button-->
-<!--                    android:layout_margin="20dp"-->
-<!--                    android:backgroundTint="#0090FF"-->
-<!--                    android:text="좋아요"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"></Button>-->
-<!--                <Button-->
-<!--                    android:layout_margin="20dp"-->
-<!--                    android:backgroundTint="#FF3636"-->
-<!--                    android:text="싫어요"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"></Button>-->
-<!--                <Button-->
-<!--                    android:layout_margin="20dp"-->
-<!--                    android:backgroundTint="#FF8686"-->
-<!--                    android:text="팔로우"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"></Button>-->
-
-<!--            </LinearLayout>-->
-
-
         </LinearLayout>
-</ScrollView>
+    </ScrollView>
 
 
-    </FrameLayout>
+</FrameLayout>

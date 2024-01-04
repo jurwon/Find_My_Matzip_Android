@@ -20,6 +20,7 @@ import com.example.find_my_matzip.navTab.navTabFragment.MyPageFragment
 import com.example.find_my_matzip.navTab.navTabFragment.NewHomeFragment
 import com.example.find_my_matzip.navTab.navTabFragment.RankingFragment
 import com.example.find_my_matzip.navTab.navTabFragment.RestaurantFragment
+import com.example.find_my_matzip.search.SearchActivity
 import com.example.find_my_matzip.utiles.SharedPreferencesManager
 import com.example.find_my_matzip.utils.LoadingDialog
 import retrofit2.Call
@@ -132,6 +133,9 @@ class HomeTabActivity : AppCompatActivity() {
                     // User doesn't have access, show a toast message
                     Toast.makeText(this@HomeTabActivity, "접근 권한이 없습니다.", Toast.LENGTH_SHORT).show()
                 }
+            }else if(it.title == "검색"){
+                val intent = Intent(this@HomeTabActivity, SearchActivity::class.java)
+                startActivity(intent)
             }
 
             true
@@ -207,7 +211,7 @@ class HomeTabActivity : AppCompatActivity() {
 
     private fun logOut(){
         //로그인 정보 지우기
-        SharedPreferencesManager.clearPreferences()
+        SharedPreferencesManager.clearLoginPreferences()
 
         // BackStack의 fragment전부 삭제
         clearBackStack()
@@ -281,7 +285,10 @@ class HomeTabActivity : AppCompatActivity() {
                                     // 파일 삭제 성공
                                     Log.d(TAG, " firestore 파일 삭제 성공")
 
-                                    logOut()
+                                    //모든 SharedPreference 삭제
+                                    SharedPreferencesManager.clearAllPreferences()
+                                    // BackStack의 fragment전부 삭제
+                                    clearBackStack()
 
                                     //로딩창 지우기
                                     loadingDialog.dismiss()
