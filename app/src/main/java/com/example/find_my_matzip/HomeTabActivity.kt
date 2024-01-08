@@ -64,30 +64,35 @@ class HomeTabActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.tab1 -> {
 //                    replaceFragment(HomeFragment())
-                    replaceFragment(NewHomeFragment())
+                    //replaceFragment(NewHomeFragment())
+                    Toast.makeText(this@HomeTabActivity, "Home", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.tab2 -> {
-                    replaceFragment(RestaurantFragment())
+                    //replaceFragment(RestaurantFragment())
+                    Toast.makeText(this@HomeTabActivity, "식당", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.tab3 -> {
-                    replaceFragment(MapFragment())
+                    //replaceFragment(MapFragment())
+                    Toast.makeText(this@HomeTabActivity, "지도", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.tab4 -> {
-                    replaceFragment(RankingFragment())
+                    //replaceFragment(RankingFragment())
+                    Toast.makeText(this@HomeTabActivity, "랭킹", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.tab5 -> {
-                    replaceFragment(MyPageFragment())
+                    //replaceFragment(MyPageFragment())
+                    Toast.makeText(this@HomeTabActivity, "프로필", Toast.LENGTH_SHORT).show()
                 }
 
                 else -> false
             }
             return@setOnNavigationItemSelectedListener true
         }
-        replaceFragment(NewHomeFragment())
+        //replaceFragment(NewHomeFragment())
 
         //Drawer 네비게이션
         binding.mainDrawerView.setNavigationItemSelectedListener {
