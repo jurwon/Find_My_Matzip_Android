@@ -75,14 +75,14 @@ class MyPageFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.writeBoardBtn.setOnClickListener {
-//            게시글작성창으로 이동
-            val writeReviewFragment = WriteReviewFragment()
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.add(R.id.fragmentContainer, writeReviewFragment)
-            transaction.addToBackStack(null)  // 백 스택에 현재 프래그먼트 추가
-            transaction.commit()
-        }
+//        binding.writeBoardBtn.setOnClickListener {
+////            게시글작성창으로 이동
+//            val writeReviewFragment = WriteReviewFragment()
+//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//            transaction.add(R.id.fragmentContainer, writeReviewFragment)
+//            transaction.addToBackStack(null)  // 백 스택에 현재 프래그먼트 추가
+//            transaction.commit()
+//        }
 
 
 
