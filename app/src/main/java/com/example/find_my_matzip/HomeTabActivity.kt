@@ -50,12 +50,12 @@ class HomeTabActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toggle = ActionBarDrawerToggle(
-            this@HomeTabActivity, binding.drawer, R.string.open, R.string.close
-        )
-
-        // 드로워 열어주기
-        toggle.syncState()
+//        toggle = ActionBarDrawerToggle(
+//            this@HomeTabActivity, binding.drawer, R.string.open, R.string.close
+//        )
+//
+//        // 드로워 열어주기
+//        toggle.syncState()
 
         // 탭 레이아웃
         val tabLayout = binding.bottomNavigationView
@@ -95,49 +95,49 @@ class HomeTabActivity : AppCompatActivity() {
         //replaceFragment(NewHomeFragment())
 
         //Drawer 네비게이션
-        binding.mainDrawerView.setNavigationItemSelectedListener {
-            if (it.title == "앱 종료") {
-
-                // 팝업 띄우기 (stack 전부 지우고 앱 종료)
-                showExitBuilder()
-
-            } else if (it.title == "로그아웃") {
-                Toast.makeText(this@HomeTabActivity, "로그아웃 화면 이동", Toast.LENGTH_SHORT).show()
-
-                // sharedPreference, BackStack의 fragment전부 삭제
-                logOut()
-
-                //로그인 화면으로 이동
-                val intent = Intent(this@HomeTabActivity, LoginActivity::class.java)
-                startActivity(intent)
-
-            } else if (it.title == "회원 탈퇴") {
-
-                val builder = AlertDialog.Builder(this@HomeTabActivity)
-                builder.setTitle("회원 탈퇴")
-                builder.setMessage("정말 탈퇴하시겠습니까???????")
-                builder.setNegativeButton("아니오") { dialog, which ->
-                    // 아무 작업도 수행하지 않음
-                }
-                builder.setPositiveButton("예") { dialog, which ->
-
-                    // 1. 비밀번호 확인 창 띄우기
-                    // 2. 확인 후 DB삭제, firestore삭제
-                    showVertifyPw()
-                }
-                builder.show()
-            }
-
-            true
-        }
+//        binding.mainDrawerView.setNavigationItemSelectedListener {
+//            if (it.title == "앱 종료") {
+//
+//                // 팝업 띄우기 (stack 전부 지우고 앱 종료)
+//                showExitBuilder()
+//
+//            } else if (it.title == "로그아웃") {
+//                Toast.makeText(this@HomeTabActivity, "로그아웃 화면 이동", Toast.LENGTH_SHORT).show()
+//
+//                // sharedPreference, BackStack의 fragment전부 삭제
+//                logOut()
+//
+//                //로그인 화면으로 이동
+//                val intent = Intent(this@HomeTabActivity, LoginActivity::class.java)
+//                startActivity(intent)
+//
+//            } else if (it.title == "회원 탈퇴") {
+//
+//                val builder = AlertDialog.Builder(this@HomeTabActivity)
+//                builder.setTitle("회원 탈퇴")
+//                builder.setMessage("정말 탈퇴하시겠습니까???????")
+//                builder.setNegativeButton("아니오") { dialog, which ->
+//                    // 아무 작업도 수행하지 않음
+//                }
+//                builder.setPositiveButton("예") { dialog, which ->
+//
+//                    // 1. 비밀번호 확인 창 띄우기
+//                    // 2. 확인 후 DB삭제, firestore삭제
+//                    showVertifyPw()
+//                }
+//                builder.show()
+//            }
+//
+//            true
+//        }
 
 
         //Drawer에 사용자 ID 넣기
-        loginUserId = SharedPreferencesManager.getString("id","")
-
-        val header: View? = binding.mainDrawerView.getHeaderView(0)
-        val text:TextView = header?.findViewById(R.id.userIdTextView) as TextView
-        text.text = "$loginUserId 님"
+//        loginUserId = SharedPreferencesManager.getString("id","")
+//
+//        val header: View? = binding.mainDrawerView.getHeaderView(0)
+//        val text:TextView = header?.findViewById(R.id.userIdTextView) as TextView
+//        text.text = "$loginUserId 님"
     }
 
 
@@ -182,13 +182,13 @@ class HomeTabActivity : AppCompatActivity() {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//
+//        if (toggle.onOptionsItemSelected(item)) {
+//            return true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     //backstack의 fragment전부 삭제
     private fun clearBackStack() {

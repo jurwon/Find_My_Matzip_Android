@@ -24,7 +24,8 @@ class IntroActivity : AppCompatActivity() {
 
         val handler = Handler()
         handler.postDelayed(Runnable {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            //val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, HomeTabActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000) // 3초 있다 메인액티비티로
