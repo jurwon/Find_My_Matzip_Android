@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <external-path
         name="myfiles"
-        path="Android/data/com.example.find_my_matzip/files/Pictures"/>
+        path="Android/data/com.matzip.find_my_matzip/files/Pictures"/>
     <cache-path
         name="uploadImg"
         path="uploadImg/"/>

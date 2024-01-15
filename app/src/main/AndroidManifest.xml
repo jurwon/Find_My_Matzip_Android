@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.find_my_matzip">
+    package="com.matzip.find_my_matzip">
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 13 버전 이후 변경된 이미지 저장소 접근 허용 양식 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> <!-- 외부 통신 위한 인터넷 퍼미션 추가 -->
+    <!--<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />--> <!-- 외부 통신 위한 인터넷 퍼미션 추가 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
@@ -35,7 +35,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.find_my_matzip"
+            android:authorities="com.matzip.find_my_matzip"
             android:enabled="true"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -60,7 +60,7 @@
             android:name=".NaverMapActivity"
             android:exported="true" />
         <activity
-            android:name=".HomeTabActivity"
+            android:name="com.matzip.find_my_matzip.HomeTabActivity"
             android:exported="true" />
         <activity
             android:name=".navTab.TabActivity"

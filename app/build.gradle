@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.find_my_matzip'
+    namespace 'com.matzip.find_my_matzip'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.find_my_matzip"
+        applicationId "com.matzip.find_my_matzip"
         minSdk 24
         targetSdk 33
         versionCode 1
