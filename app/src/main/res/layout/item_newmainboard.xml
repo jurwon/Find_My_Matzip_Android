@@ -115,27 +115,9 @@
                     android:stepSize="1"
                     android:scaleX="0.5"
                     android:scaleY="0.5"/>
+
+
             </LinearLayout>
-            <TextView
-                android:id="@+id/boardContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/nexonbold"
-                android:lineSpacingExtra="5dp"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:text="게시글내용" />
-            <TextView
-                android:id="@+id/view_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="더보기"
-                android:visibility="gone"
-                android:textColor="#9d9d9d"
-                app:layout_constraintTop_toBottomOf="@id/boardContent"
-                app:layout_constraintStart_toStartOf="parent"
-                />
             <TextView
                 android:id="@+id/AllComment"
                 android:layout_width="match_parent"

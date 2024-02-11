@@ -292,7 +292,11 @@
                             android:text="식당 소개 Data" />
                     </LinearLayout>
 
+
                 </LinearLayout>
+
+
+                <!--========================================================================================-->
 
             </LinearLayout>
 
@@ -301,6 +305,94 @@
                 android:layout_height="1dp"
                 android:background="#99857F7F"
                 android:layout_marginTop="20dp"/>
+
+<!--===================================================================================-->
+
+
+            <!-- 플로팅 버튼 -->
+
+
+
+            <!-- 지도 -->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1">-->
+
+<!--                &lt;!&ndash; MapView &ndash;&gt;-->
+<!--                <com.naver.maps.map.MapView-->
+<!--                    android:id="@+id/map"-->
+<!--                    android:name="com.naver.maps.map.MapFragment"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="300dp" />-->
+<!--            </LinearLayout>-->
+
+            <!--제목-->
+            <!--========================================================================================-->
+            <!--제목-->
+            <!-- 게시물, 팔로워 팔로잉을 묶어주는 리니어 -->
+<!--            <LinearLayout-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    >-->
+
+<!--                    <TextView-->
+<!--                        android:textSize="25dp"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:gravity="center|right"-->
+<!--                        android:fontFamily="@font/nexonbold"-->
+<!--                        android:text="리뷰 목록" />-->
+
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+<!--            &lt;!&ndash;제목&ndash;&gt;-->
+<!--            &lt;!&ndash;========================================================================================&ndash;&gt;-->
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+
+
+<!--            &lt;!&ndash;========================================================================================&ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_gravity="center"-->
+<!--                >-->
+<!--                <Button-->
+<!--                    android:layout_margin="20dp"-->
+<!--                    android:backgroundTint="#0090FF"-->
+<!--                    android:text="좋아요"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"></Button>-->
+<!--                <Button-->
+<!--                    android:layout_margin="20dp"-->
+<!--                    android:backgroundTint="#FF3636"-->
+<!--                    android:text="싫어요"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"></Button>-->
+<!--                <Button-->
+<!--                    android:layout_margin="20dp"-->
+<!--                    android:backgroundTint="#FF8686"-->
+<!--                    android:text="팔로우"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"></Button>-->
+
+<!--            </LinearLayout>-->
+
+
         </LinearLayout>
     </FrameLayout>
 </ScrollView>
@@ -312,22 +404,4 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         app:srcCompat="@drawable/baseline_edit_note_24" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editRestaurantButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="84dp"
-        android:layout_marginRight="16dp"
-        app:srcCompat="@drawable/baseline_change_circle_24" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/deleteRestaurantButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="152dp"
-        android:layout_marginRight="16dp"
-        app:srcCompat="@drawable/baseline_delete_outline_24" />
 </RelativeLayout>

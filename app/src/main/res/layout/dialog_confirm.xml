@@ -16,7 +16,7 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:textSize="17dp"
-        android:text="삭제하시겠습니까?"
+        android:text="게시글을 삭제하시겠습니까?"
         android:textStyle="bold"
         />
     <LinearLayout

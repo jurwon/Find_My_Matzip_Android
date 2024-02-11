@@ -65,7 +65,7 @@
             android:name=".navTab.navTabFragment.ResInfoActivity"
             android:theme="@style/Apptheme.Custom" />
         <activity
-            android:name="com.matzip.find_my_matzip.AddRestaurantActivity"
+            android:name=".AddRestaurantActivity"
             android:exported="true" />
         <activity
             android:name=".NaverMapActivity"
@@ -96,7 +96,8 @@
             android:exported="true" />
         <activity
             android:name=".ChatActivity"
-            android:exported="true" />
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

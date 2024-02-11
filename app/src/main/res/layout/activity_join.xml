@@ -17,17 +17,17 @@
         >
 
         <!--    툴바 뷰 붙이기 -->
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            app:layout_collapseMode="pin"-->
-<!--            android:background="@color/design_default_color_primary"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            android:background="@color/design_default_color_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-<!--        </androidx.appcompat.widget.Toolbar>-->
+        </androidx.appcompat.widget.Toolbar>
 
 
         <LinearLayout
@@ -109,7 +109,7 @@
                 android:background="@drawable/radius"
                 android:ems="10"
                 android:fontFamily="@font/nexonlight"
-                android:hint="(필수) UserId"
+                android:hint="UserId"
                 android:inputType="textPersonName"
                 android:paddingLeft="30dp"
                 android:textColor="#B3B3B3"
@@ -124,7 +124,7 @@
                 android:background="@drawable/radius"
                 android:fontFamily="@font/nexonlight"
                 android:paddingLeft="30dp"
-                android:hint="(필수) UserPassword"
+                android:hint="UserPassword"
                 android:textColor="#B3B3B3"
                 android:textSize="15sp"
                 android:ems="10"
@@ -139,7 +139,7 @@
                 android:background="@drawable/radius"
                 android:fontFamily="@font/nexonlight"
                 android:paddingLeft="30dp"
-                android:hint="(필수) Nickname"
+                android:hint="UserName"
                 android:textColor="#B3B3B3"
                 android:textSize="15sp"
                 android:ems="10"

@@ -16,7 +16,6 @@
             android:id="@+id/textViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
             android:text="전체 게시글"
             android:textSize="20dp"
             android:gravity="center"

@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/black"
                     android:fontFamily="@font/nexonmed"
-                    android:text="게시글 작성"
+                    android:text="메시지 보내기"
                     android:visibility="visible"></Button>
 
             </LinearLayout>
